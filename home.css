@@ -1,196 +1,207 @@
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-
 body{
-    background: linear-gradient(to bottom, #FFFFFF,#BAD6EA,#BAD6EA);
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    padding-top: 88px;
-    /*this is testing porpos*/
-    
+    background: linear-gradient(to bottom,#FFFFFF,#BAD6EA,#BAD6EA);
+    min-height:100vh;
+    padding-top:80px;
 }
-
-/*navbar*/
+/* Navigation bar */
 .navbar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    padding: 0 50px;
-    background: transparent;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.021);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 50px;
+    background:transparent;
+    backdrop-filter:blur(10px);
+    z-index:1000;
 }
-/* Logo */
 .logo img{
-    width: 200px;
+    width:200px;
 }
 .navtype{
-    display: flex;
-    list-style: none;
-    gap: 100px;
-}
-.navtype li{
-    font-size: 20px;
+    display:flex;
+    list-style:none;
+    gap:85px;
 }
 .navtype a{
-    color: black;
-    text-decoration: none;
-    font-weight: 600;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    transition: 0.3s;
-}
-.navtype a:hover{
-    color: #1A80F5;
-}
-/* Login Button */
-.loginbtn{
-    text-decoration: none;
-    background-color: transparent;
-    border: 2px solid #1A80F5;
     color:black;
-    padding:8px 25px;
-    border-radius:8px;
-    text-align: center;
+    text-decoration:none;
     font-size:20px;
     font-weight:600;
-    transition:0.4s;
+}
+.navtype a:hover{
+    color:#1A80F5;
+}
+.loginbtn{
+    border:2px solid #1A80F5;
+    padding:8px 25px;
+    border-radius:8px;
+    text-decoration:none;
+    color:black;
+    font-size:20px;
+    font-weight:600;
+    transition: 0.4s;
 }
 .loginbtn:hover{
     background-color: #1A80F5;
-    color:white;
+    color: white;
 }
-body{
-    padding-top:80px;
+.loginbtn:active{
+    transform: scale(1);
+}
+/* Hero Section */
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    padding:120px 50px;
+}
+.hero-text{
+    max-width:800px;
 }
 section{
-    font-size: 50px;
-    color: #1D2C68;
-    margin-top: 245px;
-    margin-left: 70px;
+    font-size:45px;
+    color:#1D2C68;
 }
 .text{
-    margin-top: 10px;
-    margin-left: 75px;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-weight: bold;
-    color: #534D4D;
+    margin-top:40px;
+    font-weight:bold;
+    color:#534D4D;
 }
-/*get start buttun eka */
-.getstart{
-    margin-top: 80px;
-    margin-left: 76px;
+.buttons{
+    margin-top:70px;
+    display:flex;
+    gap:40px;
 }
-.getstart button{
-    padding: 15px 42px;
-    font-size: 28px;
-    font-weight: 500;
+button{
+    padding:15px 42px;
+    font-size:25px;
+    border-radius:10px;
+    cursor:pointer;
+}
+#getstartbtn{
     background-color: #1A80F5;
     color: white;
-    border-radius: 10px;
-    border: none;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.getstart button:hover{
-    background-color: #2574cf;
-    color: #ffffff;
-}
-.getstart button:active{
-    transform: scale(0.96);
-    background-color: #1a80f5d7;
-    color: rgba(255, 255, 255, 0.877);
-    
-}
-/* Explore Resources buttin eka */
-.ExploreResources{
-    margin-top: -62px;
-    margin-left: 380px;
-}
-.ExploreResources button{
-    padding: 13px 42px;
-    font-size: 28px;
-    font-weight: 500;
-    background-color:transparent;
-    border: 2px solid #0474C4;
-    color:#2787f5;
-    border-radius: 10px;
-    text-align: center;
-    cursor: pointer;
+    font-weight: 300;
+    border: 3px solid #1A80F5;
     transition: 0.4s;
 }
-.ExploreResources button:hover{
+#getstartbtn:hover{
+    background-color: #1a63b8;
+    border: 3px solid #1a63b8;
+    color: wheat;
+}
+#getstartbtn:active{
+    transform: scale(0.92);
+
+}
+#ExploreResources{
+    background-color: transparent;
+    border: 3px solid #1A80F5;
+    color: #1A80F5;
+    font-weight: 300;
+    transition: 0.4s;
+}
+#ExploreResources:hover{
     background-color: #1A80F5;
     color: white;
 }
-.ExploreResources button:active{
-    transform: scale(0.96);
-    background-color: #1a80f5d7;
-    color: rgba(255, 255, 255, 0.877);
+#ExploreResources:active{
+    transform: scale(0.92);
 }
-/* image eka */
-.homeimage{
-    margin-top: -530px;
-    margin-left: 950px;
-}
+/* Image */
 .homeimage img{
-    width: 900px;
+    width: 800px;
+    max-width:800px;
 }
-/*footer section eka */
+/* Footer */
 .footer{
-    margin-top: 200px;
-    padding: 30px;
-    bottom: 0;
-    background-color: #161C33;
-    border: 2px;
+    margin-top:140px;
+    padding:40px;
+    background:#161C33;
+    display:flex;
+    justify-content:space-around;
+    flex-wrap:wrap;
 }
 .footerlogo img{
-    margin: auto;
-    margin-left: 50px;
-    padding: 15px 32px;
-    width: 200px;
+    width:200px;
 }
 .footerlogo p{
-    color: wheat;
-    width: 280px;
-    margin-left: 78px;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: small;
+    color:wheat;
+    width:280px;
 }
 .link{
-    margin-top: -90px;
-    margin-left: 600px;
+    color: wheat;
+}
+.link a{
+    color:wheat;
+    text-decoration:none;
 }
 .qlink{
-    margin: 2px;
-    padding: 10px 32px;
-    list-style: none;
+    list-style:none;
 }
 .qlink li{
-    margin: 15px;
-}.qlink a{
-    color: wheat;
-    text-decoration: none;
+    margin:15px;
 }
 .about{
-    margin-top: -230px;
-    margin-left: 900px;
-    width: 450px;
-    padding: 34px 52px;
+    color:wheat;
+    max-width:400px;
 }
 .about p{
-    margin: 20px;
-    color: #FFFFFF;
-    opacity: 0.5;
+    margin: 15px;
+}
+.f0llowus{
+    color: wheat;
+}
+/* Mobile Responsive */
+@media(max-width:768px){
+.navbar{
+    padding:0 20px;
+}
+.logo img{
+    width:130px;
+}
+.navtype{
+    display:none;
+}
+.hero{
+    flex-direction:column;
+    padding:80px 20px;
+    text-align:center;
+}
+section{
+    font-size:35px;
+}
+.text{
+    margin-left:0;
+}
+.buttons{
+    flex-direction:column;
+    align-items:center;
+}
+button{
+    width:250px;
+}
+.homeimage{
+    margin-top:50px;
+}
+.homeimage img{
+    max-width:350px;
+}
+.footer{
+    flex-direction:column;
+    gap:30px;
+    text-align:center;
+}
+.footerlogo p{
+    margin:auto;
+}
 }
