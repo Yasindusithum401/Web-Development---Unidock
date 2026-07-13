@@ -174,7 +174,7 @@ section{
 }
 .qlink{
     margin: 2px;
-    padding: 15px 32px;
+    padding: 10px 32px;
     list-style: none;
 }
 .qlink li{
@@ -182,5 +182,13 @@ section{
 }.qlink a{
     color: wheat;
     text-decoration: none;
-    
+}
+.about{
+    margin-top: -230px;
+    margin-left: 900px;
+    width: 450px;
+    padding: 34px 52px;
+}
+.about p{
+    margin: 20px;
 }
