@@ -7,7 +7,6 @@ body{
     background: linear-gradient(to bottom,#FFFFFF,#BAD6EA,#BAD6EA);
     min-height:100vh;
     padding-top:80px;
-    max-height: 100vh;
 }
 /* Navigation bar */
 .navbar{
