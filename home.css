@@ -41,7 +41,7 @@ body{
     color:#1A80F5;
 }
 .loginbtn{
-    border:2px solid #1A80F5;
+    border:3px solid #1A80F5;
     padding:8px 25px;
     border-radius:8px;
     text-decoration:none;
@@ -183,7 +183,9 @@ button{
 .modalcontainer{
     background-color:white;
     width: 500px; 
+    height: 600px;
     max-width: 90%;
+    max-height: 90%;
     border-radius: 32px;
     display: flex;
     position: relative;
@@ -242,14 +244,17 @@ button{
 }
 .formgroup label{
     display: block;
-    font-size: 12px;
-    margin-bottom: 5px;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 200;
+    margin-bottom: 7px;
     color: #333;
     text-align: left;
     padding-left: 5px;
 }
 .formgroup input{
     width: 100%;
+    margin-bottom: 15px;
     padding: 12px 16px;
     border: 2px solid #cdcdcd;
     border-radius: 16px;
