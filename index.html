@@ -7,7 +7,6 @@
     <title>Unidock</title>
 </head>
 <body>
-<!-- Navigation bar -->
 <nav class="navbar">
     <div class="logo">
         <img src="logo.png" alt="logo image">
@@ -18,9 +17,9 @@
         <li><a href="#">Resources</a></li>
         <li><a href="#">About</a></li>
     </ul>
-    <a href="login.html" class="loginbtn">Login</a>
+    <a href="#" class="loginbtn" id="openModalBtn">Login</a>
 </nav>
-<!--Hero Section-->
+
 <div class="hero">
     <div class="hero-text">
         <section>
@@ -48,12 +47,11 @@
             </div>
         </div>
     </div>
-    <!-- Home Image -->
     <aside class="homeimage">
         <img src="uphomeimage.png" alt="home image">
     </aside>
 </div>
-<!-- Footer -->
+
 <footer class="footer">
     <div class="footerlogo">
         <img src="logo.png" alt="logo image">
@@ -80,8 +78,54 @@
     </div>
     <div class="f0llowus">
         <h3>Follow Us</h3>
-
     </div>
 </footer>
+<div class="modaloverlay" id="modaloverlay">
+    <div class="modalcontainer">
+        <button class="closebtn" id="closeModalBtn">&times;</button>
+        <div class="modalleft">
+            
+            <div id="loginFormContainer" class="formcontainer active">
+                <h2>Welcome To Unidock</h2>
+                <div class="formgroup">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email">
+                </div>
+                <div class="formgroup">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password">
+                </div>
+                <button class="submitbtn">Log In</button>  
+                
+                <p style="margin-top: 15px; font-size: 14px; text-align: center;">
+                    Not on Unidock yet? <a href="#" id="switchToSignUp" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Sign up</a>
+                </p>
+            </div>
+
+            <div id="signupFormContainer" class="formcontainer">
+                <h2>Create Account</h2>
+                <div class="formgroup"> <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" name="signupname" placeholder="Full Name">
+                </div>
+                <div class="formgroup">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email">
+                </div>
+                <div class="formgroup">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Create Password">
+                </div>
+                <button class="submitbtn" style="background-color: #0076d3;">Sign up</button>
+                
+                <p style="margin-top: 15px; font-size: 14px; text-align: center;">
+                    Already have an account? <a href="#" id="switchToLogIn" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Log in</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="login.js"></script>
 </body>
 </html>
