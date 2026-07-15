@@ -1,0 +1,156 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    background: linear-gradient(to bottom,#FFFFFF,#BAD6EA,#BAD6EA);
+    min-height:100vh;
+    padding-top:80px;
+}
+.featuressection{
+    width:100%;
+    padding:90px 8%;
+}
+.sectiontitle{
+    text-align:center;
+    font-size:42px;
+    font-weight:700;
+    color:#222;
+    margin-bottom:80px;
+}
+.featurescontainer{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:35px;
+}
+/* Card */
+.featurecard{
+    background:#eef5fb;
+    border:1px solid #cfd8e3;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    gap:24px;
+    padding:40px;
+    transition:.35s;
+    cursor:pointer;
+    width: 100%;
+    height: 100%;
+}
+.featurecard:hover{
+    transform:translateY(-10px);
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+    background:#ffffff;
+}
+.cardlink{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+/* icon background  */
+.icon{
+    width:82px;
+    height:82px;
+    min-width:82px;
+    border-radius:50%;
+    background:#dde5ef;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:42px;
+}
+/* icon color */
+.blue{
+    color:#2878d7;
+}
+.green{
+    color:#33c200;
+}
+.purple{
+    color:#8b18ff;
+}
+.red{
+    color:#ff0000;
+}
+.lightgreen{
+    color:#59b96e;
+}
+.darkblue{
+    color:#1d2ad3;
+}
+.cardlink span{
+    font-size: 58px;
+}
+
+/* Text */
+
+.featurecontent h3{
+    font-size:31px;
+    font-weight:700;
+    color:#2b2b2b;
+    margin-bottom:10px;
+}
+.featurecontent p{
+    font-size:17px;
+    color:#555;
+    line-height:1.8;
+}
+@media(max-width:1100px){
+
+.featurescontainer{
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+.featurecard{
+    padding:30px;
+}
+.sectiontitle{
+    font-size:36px;
+}
+.featurecontent h3{
+    font-size:24px;
+}
+.featurecontent p{
+    font-size:15px;
+}
+.icon{
+    width:70px;
+    height:70px;
+    min-width:70px;
+    font-size:34px;
+}
+}
+@media(max-width:768px){
+body{
+    padding-top:70px;
+}
+.featuressection{
+    padding:60px 20px;
+}
+.featurescontainer{
+    grid-template-columns:1fr;
+    gap:20px;
+}
+.sectiontitle{
+    font-size:30px;
+    margin-bottom:40px;
+}
+.featurecard{
+    padding:22px;
+    gap:18px;
+}
+.icon{
+    width:60px;
+    height:60px;
+     min-width:60px;
+    font-size:28px;
+}
+.featurecontent h3{
+    font-size:22px;
+}
+.featurecontent p{
+    font-size:14px;
+    line-height:1.6;
+}
+}
