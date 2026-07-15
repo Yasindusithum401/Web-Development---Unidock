@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="features.css">
+    <title>Features</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+<style>    
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+</style>
+    
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="logo image">
+    </div>
+    <ul class="navtype">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="#">Resources</a></li>
+        <li><a href="#">About</a></li>
+    </ul>
+    <a href="#" class="loginbtn" id="openModalBtn">Login</a>
+</nav>
+<section class="featuressection">
+    <h2 class="sectiontitle">Platform Features</h2>
+    <div class="featurescontainer">
+        <!-- Card 1 -->
+        <a href="#" class="cardlink">
+        <div class="featurecard">
+            <div class="icon blue">
+                <span class="material-symbols-outlined">cloud_upload</span>
+            </div>
+            <div class="featurecontent">
+                <h3>Upload Resources</h3>
+                <p>Upload your notes, PDF and useful study links.</p>
+            </div>
+        </div>
+        </a>
+        <!-- Card 2 -->
+        <a href="#" class="cardlink">
+        <div class="featurecard">
+            <div class="icon green">
+                <span class="material-symbols-outlined">search</span>
+            </div>
+            <div class="featurecontent">
+                <h3>Smart Search</h3>
+                <p>Find resources quickly using advanced search.</p>
+            </div>
+        </div>
+        </a>
+        <!-- Card 3 -->
+        <a href="#" class="cardlink">
+        <div class="featurecard">
+            <div class="icon purple">
+                <span class="material-symbols-outlined">checklist</span>
+            </div>
+            <div class="featurecontent">
+                <h3>To Do List</h3>
+                <p>Your personal space to plan and complete daily tasks.</p>
+            </div>
+        </div>
+        </a>
+        <!-- Card 4 -->
+        <a href="#" class="cardlink">
+        <div class="featurecard">
+            <div class="icon red">
+                <span class="material-symbols-outlined">bookmark</span>
+            </div>
+            <div class="featurecontent">
+                <h3>Bookmark & Save</h3>
+                <p>Save your favorite resources and access them anytime.</p>
+            </div>
+        </div>
+        </a>
+        <!-- Card 5 -->
+        <a href="#" class="cardlink">
+        <div class="featurecard">
+            <div class="icon lightgreen">
+                <span class="material-symbols-outlined">forum</span>
+            </div>
+            <div class="featurecontent">
+                <h3>Ask Questions</h3>
+                <p>Get together with friends to sort out problems.</p>
+            </div>
+        </div>
+        </a>
+        <!-- Card 6 -->
+        <a href="#" class="cardlink">
+        <div class="featurecard">
+            <div class="icon darkblue">
+                <span class="material-symbols-outlined">notifications_active</span>
+            </div>
+            <div class="featurecontent">
+                <h3>Reminder</h3>
+                <p>Save important jobs and receive reminders.</p>
+            </div>
+        </div>
+        </a>
+    </div>
+</section>
+<footer class="footer">
+    <div class="footerlogo">
+        <img src="logo.png" alt="logo image">
+        <p> A Platform For Students To Share, Discover and Learn Together. </p>
+    </div>
+    <div class="link">
+        <h3>
+            Quick Links
+        </h3>
+        <ul class="qlink">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
+    <div class="about">
+        <h3>About</h3>
+        <p> Student Resources Hub is a platform designed to help
+            students access study materials, organize tasks,
+            manage reminders, and discover useful academic
+            resources in one convenient place.Our goal is to support students in achieving academic success through simple and effective digital tools.
+        </p>
+    </div>
+    <div class="f0llowus">
+        <h3>Follow Us</h3>
+    </div>
+</footer>
+<form action="#" method="#">
+    <div class="modaloverlay" id="modaloverlay">
+        <div class="modalcontainer">
+            <button class="closebtn" id="closeModalBtn">&times;</button>
+            <div class="modalleft">
+                
+                <div id="loginFormContainer" class="formcontainer active">
+                    <h2>Welcome To Unidock</h2>
+                    <div class="formgroup">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="formgroup">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Password">
+                    </div>
+                    <button class="submitbtn">Log In</button>  
+                    
+                    <p style="margin-top: 15px; font-size: 14px; text-align: center;">
+                        Not on Unidock yet? <a href="#" id="switchToSignUp" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Sign up</a>
+                    </p>
+                </div>
+
+                <div id="signupFormContainer" class="formcontainer">
+                    <h2>Create Account</h2>
+                    <div class="formgroup"> <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" name="signupname" placeholder="Full Name">
+                    </div>
+                    <div class="formgroup">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email">
+                    </div>
+                    <div class="formgroup">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="signupPassword" placeholder="Create Password">
+                    </div>
+                    <button class="submitbtn" style="background-color: #0076d3;">Sign up</button>
+                    
+                    <p style="margin-top: 15px; font-size: 14px; text-align: center;">
+                        Already have an account? <a href="#" id="switchToLogIn" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Log in</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<script src="login.js"></script>
+</body>
+</html>
