@@ -1,0 +1,14 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    background: linear-gradient(to bottom,#FFFFFF,#BAD6EA,#BAD6EA);
+    min-height:100vh;
+    padding-top:80px;
+}
+about2{
+    justify-content: center;
+    justify-items: center;
+}
