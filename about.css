@@ -8,7 +8,9 @@ body{
     min-height:100vh;
     padding-top:80px;
 }
-about2{
-    justify-content: center;
-    justify-items: center;
+.about2{
+  display: flex;
+  justify-content: center; 
+  align-items: center;         
+
 }
