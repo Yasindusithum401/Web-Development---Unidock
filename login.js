@@ -1,4 +1,4 @@
-//login popup eka 
+//login popup eka js 1 
 const openModalBtn = document.getElementById('openModalBtn');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const modalOverlay = document.getElementById('modaloverlay');
@@ -41,7 +41,7 @@ if(switchToLogIn) {
         loginFormContainer.classList.add('active');
     });
 }
-//mobile list eka 
+//mobile list eka js 2 eka
 const openModalBtn2 = document.getElementById("openModalBtn2");
 
 if (openModalBtn2) {
@@ -60,7 +60,7 @@ if(menuToggle && navMenu){
         navMenu.classList.toggle("active");
     });
 }
-//home page text animation eka
+//home page text animation eka js 3 eka 
 const words = [
     "Share, Discover and Access Quality Study Materials Easily.Learn Together, Grow Together."
 ];
