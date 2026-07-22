@@ -11,6 +11,70 @@ body{
 .about2{
   display: flex;
   justify-content: center; 
-  align-items: center;         
+  align-items: center;   
+  height: 60px;      
+}
+.p{
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  text-align: center;
+  height: 60px;
+  font-size: 20px;
+}
+.c{
+    display: flex;
+    justify-content: center; 
+    border-radius: 12px;
+    gap: 30px; 
+    width: 100%;
+    max-width: 1200px; 
+    margin: 40px auto; 
+    flex-wrap: wrap; 
+}
+.mission{
+    background-color: #b3e5fc;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center; 
+    flex-direction: column ;
+}
+.a{
+    font-weight: bold;
+}
+/* The main container acting as the "bar" */
+.stats-bar {
+    display: flex;
+    justify-content: space-around; /* Spreads the 4 items out evenly */
+    align-items: center;
+    background-color: #ffffff; /* Gives the bar a white background */
+    padding: 40px 20px; /* Adds space inside the bar */
+    margin: 50px auto; /* Centers the bar and adds space above/below */
+    max-width: 1700px; /* Keeps it from stretching too far on wide screens */
+    border-radius: 12px; /* Optional: rounds the corners of the bar */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Optional: adds a subtle shadow */
+    flex-wrap: wrap; /* Ensures the stats stack neatly on mobile phones */
+}
 
+/* The individual statistic blocks */
+.stat-item {
+    text-align: center; /* Centers the text inside each block */
+    padding: 10px;
+}
+
+/* Styling the big numbers */
+.stat-number {
+    display: block; /* Forces the number to sit on top of the label */
+    font-size: 36px; /* Makes the number large */
+    font-weight: bold; /* Makes the number thick */
+    color: #003366; /* A dark blue color, adjust to match your theme */
+}
+
+/* Styling the text underneath the numbers */
+.stat-label {
+    display: block;
+    font-size: 16px;
+    color: #555555; /* A softer gray color for the subtext */
+    margin-top: 8px; /* Adds a tiny bit of breathing room between number and text */
 }
