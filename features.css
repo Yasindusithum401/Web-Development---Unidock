@@ -48,7 +48,6 @@ body{
     color: inherit;
     display: block;
 }
-/*icon background*/
 .icon{
     width:82px;
     height:82px;
@@ -82,9 +81,7 @@ body{
 .cardlink span{
     font-size: 58px;
 }
-
 /*text*/
-
 .featurecontent h3{
     font-size:31px;
     font-weight:700;
@@ -122,6 +119,7 @@ body{
     font-size:34px;
 }
 }
+/*Mobile respon*/
 @media(max-width:768px){
 body{
     padding-top:70px;
