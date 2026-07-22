@@ -41,6 +41,25 @@ if(switchToLogIn) {
         loginFormContainer.classList.add('active');
     });
 }
+//mobile list eka 
+const openModalBtn2 = document.getElementById("openModalBtn2");
+
+if (openModalBtn2) {
+    openModalBtn2.addEventListener("click", function (e) {
+        e.preventDefault();
+        modalOverlay.classList.add("active");
+        navMenu.classList.remove("active");
+    });
+}
+// Mobile Menu
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+if(menuToggle && navMenu){
+    menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
+}
 //home page text animation eka
 const words = [
     "Share, Discover and Access Quality Study Materials Easily.Learn Together, Grow Together."
