@@ -43,7 +43,7 @@
     <h2 class="sectiontitle">Platform Features</h2>
     <div class="featurescontainer">
         <!-- Card 1 -->
-        <a href="#" class="cardlink">
+        <a href="" class="cardlink" id="uploadCard">
         <div class="featurecard">
             <div class="icon blue">
                 <span class="material-symbols-outlined">cloud_upload</span>
@@ -103,7 +103,7 @@
         </div>
         </a>
         <!-- Card 6 -->
-        <a href="#" class="cardlink">
+        <a href="" class="cardlink" id="reminderCard" >
         <div class="featurecard">
             <div class="icon darkblue">
                 <span class="material-symbols-outlined">notifications_active</span>
@@ -155,50 +155,150 @@
 <form action="#" method="#">
     <div class="modaloverlay" id="modaloverlay">
         <div class="modalcontainer">
-            <button class="closebtn" id="closeModalBtn">&times;</button>
+            <button type="button" class="closebtn" id="closeModalBtn">&times;</button>
             <div class="modalleft">
                 
                 <div id="loginFormContainer" class="formcontainer active">
                     <h2>Welcome To Unidock</h2>
                     <div class="formgroup">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Email">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="formgroup">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Password">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
                     </div>
-                    <button class="submitbtn">Log In</button>  
+                    <button type="submit" name="login" class="submitbtn">Log In</button>  
                     
                     <p style="margin-top: 15px; font-size: 14px; text-align: center;">
                         Not on Unidock yet? <a href="#" id="switchToSignUp" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Sign up</a>
                     </p>
                 </div>
-                <!--sign up section-->
+</form>
+                 <!--sign up section-->
+                <form action="#" method="post">
                 <div id="signupFormContainer" class="formcontainer">
                     <h2>Create Account</h2>
                     <div class="formgroup"> <label for="signupName">Full Name</label>
-                        <input type="text" id="signupName" name="signupname" placeholder="Full Name">
+                        <input type="text" id="signupName" name="signupname" placeholder="Full Name" required>
                     </div>
                     <div class="formgroup">
                         <label for="signupEmail">Email</label>
-                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email">
+                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required>
                     </div>
                     <div class="formgroup">
                         <label for="signupPassword">Password</label>
-                        <input type="password" id="signupPassword" name="signupPassword" placeholder="Create Password">
+                        <input type="password" id="signupPassword" name="signupPassword" placeholder="Create Password" required>
                     </div>
-                    <button class="submitbtn" style="background-color: #0076d3;">Sign up</button>
+                    <button type="submit" name="signup" class="submitbtn" style="background-color: #0076d3;">Sign up</button>
                     
                     <p style="margin-top: 15px; font-size: 14px; text-align: center;">
                         Already have an account? <a href="#" id="switchToLogIn" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Log in</a>
                     </p>
                 </div>
-
+                </form>
             </div>
         </div>
     </div>
-</form>
+<!--Upload Resource-->
+<div class="uploadOverlay" id="uploadOverlay">
+    <div class="uploadContainer">
+        <button type="button" class="uploadClose" id="closeUpload">
+            &times;
+        </button>
+        <h2>Upload Study Resource</h2>
+        <form action="#" method="POST" enctype="multipart/form-data"><!--php file eka danna e wage pdf eka varify kara ganna remmember -->
+            <div class="uploadGroup">
+                <label for="title">Resource Title</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Enter Resource Title"
+                    required>
+            </div>
+            <div class="uploadGroup">
+                <label for="subject">Subject</label>
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="Enter Subject Name"
+                    required>
+            </div>
+            <div class="uploadGroup">
+                <label for="subjectCode">Subject Code</label>
+                <input
+                    type="text"
+                    id="subjectCode"
+                    name="subjectCode"
+                    placeholder="Example : ICT1213"
+                    required>
+            </div>
+            <div class="uploadGroup">
+                <label for="resource">Upload PDF</label>
+                <input
+                    type="file"
+                    id="resource"
+                    name="resource"
+                    accept=".pdf,application/pdf"
+                    required>
+                <small>Only PDF files are allowed.</small>
+            </div>
+            <button type="submit" class="uploadBtn">Upload PDF</button>
+        </form>
+    </div>
+</div>
+<!--reminder eka-->
+<div class="reminderOverlay" id="reminderOverlay">
+    <div class="reminderContainer">
+        <button 
+        type="button" 
+        class="reminderClose"
+        id="closeReminder">
+        &times;
+        </button>
+        <h2> My Reminders</h2>
+        <div id="reminderList">
+            <div class="emptyReminder">No reminders yet.</div>
+        </div>
+        <button 
+        class="addReminderBtn"
+        id="openAddReminder">
+        + Add Reminder
+        </button>
+    </div>
+</div>
+<div class="addReminderOverlay" id="addReminderOverlay">
+    <div class="addReminderContainer">
+        <button 
+        class="reminderClose"
+        id="closeAddReminder">
+        &times;
+        </button>
+        <h2> Add New Reminder</h2>
+        <div class="uploadGroup">
+            <label>Title</label>
+            <input 
+            type="text"
+            id="reminderTitle"
+            placeholder="Enter reminder title">
+        </div>
+        <div class="uploadGroup">
+            <label>Note </label>
+            <textarea 
+            id="reminderNote"
+            placeholder="Write your note">
+            </textarea>
+        </div>
+        <button 
+        class="uploadBtn"
+        id="saveReminder">
+        Save Reminder
+        </button>
+    </div>
+</div>
 <script src="login.js"></script>
+<script src="features.js"></script>
 </body>
 </html>
