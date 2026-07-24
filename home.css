@@ -227,7 +227,18 @@ button{
     overflow: hidden;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     transform: scale(0.8);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.35s ease-in-out;
+    animation:popup .35s ease;
+}
+@keyframes popup{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
 }
 .modaloverlay.active .modalcontainer{
     transform: scale(1);
