@@ -178,6 +178,9 @@ button{
 .qlink li{
     margin:15px;
 }
+.qlink li a:hover{
+    color: #1A80F5;
+}
 .about{
     color:wheat;
     max-width:400px;
