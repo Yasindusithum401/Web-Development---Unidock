@@ -67,7 +67,7 @@
         </div>
         </a>
         <!-- Card 3 -->
-        <a href="#" class="cardlink">
+        <a href="" class="cardlink" id="todolistCard">
         <div class="featurecard">
             <div class="icon purple">
                 <span class="material-symbols-outlined">checklist</span>
@@ -295,6 +295,56 @@
         class="uploadBtn"
         id="saveReminder">
         Save Reminder
+        </button>
+    </div>
+</div>
+<!--To do list eka -->
+<div class="todolistoverlay" id="todolistoverlay">
+    <div class="todolistContainer">
+        <button 
+        type="button" 
+        class="todolistClose"
+        id="closetodolist">
+        &times;
+        </button>
+        <h2>My To Do List</h2>
+        <button id="clearAllTodoBtn" class="clearAllBtn">Clear All Tasks</button>
+        <div id="todoList">
+            <div class="emptytodolist">No To Do list yet.</div>
+        </div>
+        <button 
+        class="addtodolistBtn"
+        id="openAddtodolist">
+        + Add To Do list
+        </button>
+    </div>
+</div>
+<div class="addtodolisOverlay" id="addtodolistOverlay">
+    <div class="addtodolistContainer">
+        <button 
+        class="todolistClose"
+        id="closeAddtodolist">
+        &times;
+        </button>
+        <h2> Add New To Do List</h2>
+        <div class="uploadGroup2">
+            <label>Title</label>
+            <input 
+            type="text"
+            id="todolistTitle"
+            placeholder="Enter To Do title">
+        </div>
+        <div class="uploadGroup2">
+            <label>Note </label>
+            <textarea 
+            id="TodolistNote"
+            placeholder="Write your note">
+            </textarea>
+        </div>
+        <button 
+        class="uploadBtn2"
+        id="savetodolist">
+        Save TO DO list
         </button>
     </div>
 </div>
