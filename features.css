@@ -192,7 +192,7 @@ body{
     display:none;
     justify-content:center;
     align-items:center;
-    z-index:9999;
+    z-index:99999;
     padding:20px;
 }
 .reminderContainer,
@@ -231,7 +231,7 @@ body{
     margin-bottom:15px;
 }
 .reminderCard h3{
-    color:#1d2ad3;
+    color:#06f125;
 }
 .reminderCard p{
     color:#555;
@@ -269,6 +269,156 @@ transform:scale(1);
 opacity:1;
 }
 }
+/*todolist eka */
+.todolistoverlay,
+.addtodolisOverlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.55);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    padding:20px;
+}
+.todolistContainer,
+.addtodolistContainer{
+    background:white;
+    width:700px;
+    max-width:95%;
+    padding:40px;
+    border-radius:25px;
+    position:relative;
+    animation:popup .3s ease;
+}
+.todolistContainer h2,
+.addtodolistContainer h2{
+    text-align:center;
+    color:#8b18ff;
+    margin-bottom:25px;
+}
+.todolistClose{
+    position:absolute;
+    right:20px;
+    top:15px;
+    background:none;
+    border:none;
+    font-size:35px;
+    cursor:pointer;
+}
+#todoList{
+    max-height:350px;
+    overflow-y:auto;
+}
+.todolistCard{
+    background:#fff7ef;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+.todolistCard h3{
+    color:#8b18ff;
+}
+.todolistCard p{
+    color:#555;
+}
+.addtodolistBtn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#8b18ff;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+}
+#TodolistNote{
+    width:100%;
+    height:180px;
+    resize:none;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+.emptytodolist{
+     text-align:center;
+    color:#777;
+    padding:30px;
+}
+.uploadGroup2 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+.uploadGroup2 label {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.uploadGroup2 input,
+.uploadGroup2 textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+    font-family: inherit;
+}
+.uploadGroup2 input:focus,
+.uploadGroup2 textarea:focus {
+    border-color: #8b18ff;
+}
+.uploadBtn2 {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background:#8b18ff; 
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+.uploadBtn2:hover {
+    background: #8b18ff;
+}
+.todolistCard.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+    background: #e0e0e0;
+}
+.todolistCard {
+    cursor: pointer; 
+    user-select: none;
+    transition: 0.2s ease;
+}
+.clearAllBtn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    float: right;
+}
+.clearAllBtn:hover {
+    background: #cc0000;
+}
+@keyframes popup{
+from{
+transform:scale(.7);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
 /*tablet respon*/
 @media(max-width:1100px){
 
@@ -295,21 +445,74 @@ opacity:1;
     font-size:34px;
 }
 .uploadContainer{
-        width: 90%;
-        max-width: 500px;
-        padding: 25px;
-    }
-    .uploadContainer h2{
-        font-size: 24px;
-    }
-    .uploadGroup input{
-        padding: 11px;
-        font-size: 15px;
-    }
-    .uploadBtn{
-        padding: 12px;
-        font-size: 15px;
-    }
+    width: 90%;
+    max-width: 500px;
+    padding: 25px;
+}
+.uploadContainer h2{
+    font-size: 24px;
+}
+.uploadGroup input{
+    padding: 11px;
+    font-size: 15px;
+}
+.uploadBtn{
+    padding: 12px;
+    font-size: 15px;
+}
+.todolistoverlay,
+.addtodolisOverlay{
+    padding:25px;
+}
+.todolistContainer,
+.addtodolistContainer{
+    width:85%;
+    max-width:700px;
+    padding:35px;
+    border-radius:20px;
+}
+.todolistContainer h2,
+.addtodolistContainer h2{
+    font-size:28px;
+}
+.todolistClose{
+    font-size:32px;
+    top:15px;
+    right:18px;
+}
+#todoList{
+    max-height:320px;
+}
+.todolistCard{
+    padding:18px;
+}
+.todolistCard h3{
+    font-size:20px;
+}
+.todolistCard p{
+    font-size:15px;
+    line-height:1.6;
+}
+.uploadGroup2 label{
+    font-size:16px;
+}
+.uploadGroup2 input,
+.uploadGroup2 textarea{
+    padding:12px;
+    font-size:15px;
+}
+#TodolistNote{
+    height:160px;
+}
+.uploadBtn2,
+.addtodolistBtn{
+    padding:14px;
+    font-size:16px;
+}
+.clearAllBtn{
+    padding:10px 18px;
+    font-size:14px;
+}
 }
 /*Mobile respon*/
 @media(max-width:768px){
@@ -376,7 +579,65 @@ body{
 }
 .reminderContainer,
 .addReminderContainer{
-width:90%;
-padding:25px;
+    width:90%;
+    padding:25px;
+}
+.todolistoverlay,
+.addtodolisOverlay{
+    padding:15px;
+    align-items:flex-start;
+    overflow-y:auto;
+}
+.todolistContainer,
+.addtodolistContainer{
+    width:100%;
+    padding:25px 20px;
+    border-radius:18px;
+    margin-top:40px;
+}
+.todolistContainer h2,
+.addtodolistContainer h2{
+    font-size:24px;
+    margin-bottom:20px;
+}
+.todolistClose{
+    top:10px;
+    right:15px;
+    font-size:30px;
+}
+#todoList{
+    max-height:280px;
+}
+.todolistCard{
+    padding:15px;
+    border-radius:12px;
+}
+.todolistCard h3{
+    font-size:18px;
+}
+.todolistCard p{
+    font-size:14px;
+    line-height:1.5; 
+}
+.uploadGroup2 label{
+    font-size:15px;
+}
+.uploadGroup2 input,
+.uploadGroup2 textarea{
+    font-size:14px;
+    padding:10px;
+}
+#TodolistNote{
+    height:140px;
+}
+.uploadBtn2,
+.addtodolistBtn{
+    padding:12px;
+    font-size:15px;
+}
+.clearAllBtn{
+    width:100%;
+    float:none;
+    margin-bottom:15px;
 }
 }
