@@ -41,8 +41,9 @@ body{
 .navtype a{
     color:black;
     text-decoration:none;
-    font-size:20px;
-    font-weight:600;
+    font-size:18px;
+    font-weight:400;
+    font-family:"Poppins",sans-serif;
 }
 .navtype a:hover{
     color:#1A80F5;
@@ -56,6 +57,7 @@ body{
     font-size:20px;
     font-weight:600;
     transition: 0.4s;
+    font-family:"Poppins",sans-serif;
 }
 .loginbtn:hover{
     background-color: #1A80F5;
@@ -199,6 +201,19 @@ button{
     text-decoration: none;
     color: wheat;
 }
+.footer-bottom {
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    clear: both;
+}
+.footer-bottom p {
+    margin: 10px;
+    font-size: 14px;
+    color: #8a92a6;
+    width: 100%;
+    text-align: center;
+}
 /*login popup eka */
 .modaloverlay{
     position: fixed;
@@ -213,6 +228,7 @@ button{
     z-index: 2000;
     opacity: 0;
     transition: opacity 0.5s ease-in-out; 
+    font-family:"Poppins",sans-serif;
 }
 .modaloverlay.active{
     display: flex;
