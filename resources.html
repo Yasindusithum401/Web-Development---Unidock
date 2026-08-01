@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - UniDock</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="resources.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="logo image">
+    </div>
+    <div class="menutoggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul class="navtype" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="resources.html" class="active">Resources</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="mobilelogin">
+            <a href="#" id="openModalBtn2">Login</a>
+        </li>
+    </ul>
+    <a href="#" class="loginbtn" id="openModalBtn">Login</a>
+</nav>
+<header class="resource-banner">
+    <div class="banner-content">
+        <h1>Explore Resources</h1>
+        <p>Find the best study materials shared by students.</p>
+    </div>
+    <div class="banner-image">
+        <img src="resources image.png" alt="Resources Illustration">
+    </div>
+</header>
+<main class="resources-container">
+    <div class="content-wrapper">
+
+        <aside class="categories-sidebar">
+            <h3>Categories</h3>
+            <ul class="category-list" id="categoryList">
+                <li class="active"><a href="#" data-category="all">All Categories</a></li>
+                <li><a href="#" data-category="Web Development">Web Development</a></li>
+                <li><a href="#" data-category="Computer Science">Computer Science</a></li>
+                <li><a href="#" data-category="Mathematics">Mathematics</a></li>
+                <li><a href="#" data-category="Physics">Physics</a></li>
+                <li><a href="#" data-category="Art">Art</a></li>
+                <li><a href="#" data-category="Engineering">Engineering</a></li>
+
+                <ul class="extra-categories" id="extraCategories">
+                    <li><a href="#" data-category="Chemistry">Chemistry</a></li>
+                    <li><a href="#" data-category="Business Studies">Business Studies</a></li>
+                    <li><a href="#" data-category="Software Engineering">Software Engineering</a></li>
+                    <li><a href="#" data-category="Languages">Languages</a></li>
+                </ul><!--add can more (onasubject ekaka add )-->
+
+                <li class="more-btn" id="moreCategoriesBtn">
+                    More <i class="fa-solid fa-chevron-down"></i>
+                </li>
+            </ul>
+        </aside>
+        <section class="resources-list-section">
+            <h2>All Resources</h2>
+            <div class="resources-list" id="resourcesList">
+            </div>
+
+            <!-- Pagination Section -->
+            <div class="pagination">
+                <a href="#" class="prev"><i class="fa-solid fa-chevron-left"></i></a>
+                <a href="#" class="page active">1</a>
+                <a href="#" class="page">2</a>
+                <a href="#" class="page">3</a>
+                <a href="#" class="page">4</a>
+                <a href="#" class="page">5</a>
+                <span class="dots">...</span>
+                <a href="#" class="page">10</a>
+                <a href="#" class="next"><i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+        </section>
+
+    </div>
+</main>
+<!--FooterSection-->
+<footer class="footer">
+    <div class="footerlogo">
+        <img src="logo.png" alt="logo image">
+        <p>A Platform For Students To Share, Discover and Learn Together.</p>
+    </div>
+    <div class="link">
+        <h3>Quick Links</h3>
+        <ul class="qlink">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+    <div class="about">
+        <h3>About</h3>
+        <p>Student Resources Hub is a platform designed to help students access study materials, organize tasks, manage reminders, and discover useful academic resources in one convenient place.</p>
+    </div>
+    <div class="f0llowus">
+        <h3>Follow Us</h3>
+        <div class="iconfooter">
+            <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-threads"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fa-solid fa-x"></i></a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 UniDock. All Rights Reserved.</p>
+    </div>
+</footer>
+<!--login section-->
+<form action="#" method="#">
+    <div class="modaloverlay" id="modaloverlay">
+        <div class="modalcontainer">
+            <button type="button" class="closebtn" id="closeModalBtn">&times;</button>
+            <div class="modalleft">
+
+                <div id="loginFormContainer" class="formcontainer active">
+                    <h2>Welcome To Unidock</h2>
+                    <div class="formgroup">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="formgroup">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" name="login" class="submitbtn">Log In</button>
+
+                    <p style="margin-top: 15px; font-size: 14px; text-align: center;">
+                        Not on Unidock yet? <a href="#" id="switchToSignUp" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Sign up</a>
+                    </p>
+                </div>
+</form>
+                 <!--sign up section-->
+                <form action="#" method="post">
+                <div id="signupFormContainer" class="formcontainer">
+                    <h2>Create Account</h2>
+                    <div class="formgroup"> <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" name="signupname" placeholder="Full Name" required>
+                    </div>
+                    <div class="formgroup">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required>
+                    </div>
+                    <div class="formgroup">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="signupPassword" placeholder="Create Password" required>
+                    </div>
+                    <button type="submit" name="signup" class="submitbtn" style="background-color: #0076d3;">Sign up</button>
+
+                    <p style="margin-top: 15px; font-size: 14px; text-align: center;">
+                        Already have an account? <a href="#" id="switchToLogIn" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Log in</a>
+                    </p>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<script>
+//resources eke togale eka
+const moreBtn = document.getElementById('moreCategoriesBtn');
+    const extraCategories = document.getElementById('extraCategories');
+
+    moreBtn.addEventListener('click', function() {
+        if (extraCategories.style.display === "block") {
+            extraCategories.style.display = "none";
+            moreBtn.innerHTML = 'More <i class="fa-solid fa-chevron-down"></i>';
+        } else {
+            extraCategories.style.display = "block";
+            moreBtn.innerHTML = 'Less <i class="fa-solid fa-chevron-up"></i>';
+        }
+    });
+</script>
+<script src="login.js"></script>
+<script src="Resources .js"></script>
+</body>
+</html>
