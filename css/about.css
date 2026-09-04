@@ -1,0 +1,424 @@
+body{
+    font-family: revert;
+}
+body ul,
+body ol,
+body p,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6{
+    margin: 0;
+    padding: 0;
+}
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6{
+    font-size: revert;
+    font-weight: revert;
+    line-height: revert;
+}
+nav.navbar{
+    position: fixed;
+    top: 0 ;
+    left: 0 ;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    margin: 0;
+    border: none;
+}
+
+.logo img{
+    width: 200px;
+    height: auto;
+}
+.navtype{
+    display: flex;
+    list-style: none;
+    gap: 85px;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+}
+.navtype li{
+    transition: 0.20s;
+    margin: 0;
+}
+
+.navtype li:hover{
+    transform: scale(1.3);
+    letter-spacing: 1px;
+}
+.navtype a{
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 400;
+    background: transparent;
+    font-family: "Poppins", sans-serif;
+}
+.navtype a:hover{
+    color: #1A80F5;
+}
+.loginbtn{
+    border: 3px solid #1A80F5;
+    padding: 8px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    transition: 0.4s;
+    display: inline-block;
+    background: transparent;
+    line-height: normal;
+    font-family: "Poppins", sans-serif;
+}
+.loginbtn:hover{
+    background-color: #1A80F5;
+    color: white;
+}
+
+.mobilelogin{
+    display: none;
+}
+
+.menutoggle{
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+.about2{
+    text-align: center;
+    margin: 50px 0 20px;
+}
+
+.about2 h1{
+    font-size: 45px;
+    color: #1D2C68;
+    font-weight: 700;
+}
+
+.p{
+    width: 85%;
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+}
+
+.p p{
+    font-size: 18px;
+    line-height: 1.8;
+    color: #534D4D;
+}
+
+/* Mission Cards */
+.c{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto;
+    flex-wrap: wrap;
+}
+
+.mission{
+    background: white;
+    width: 320px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: .3s;
+}
+
+.mission:hover{
+    transform: translateY(-10px);
+}
+
+.mission .a{
+    color: #1A80F5;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.mission p{
+    line-height: 1.6;
+    color: #555;
+    font-size: 16px;
+}
+
+/* Statistics Bar */
+.stats-bar{
+    width: 90%;
+    max-width: 1100px;
+    margin: 50px auto;
+    background: #161C33;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    flex-wrap: wrap;
+    transition: 0.4s;
+}
+.stats-bar:hover{
+    transform: scale(1.1) translateY(-10px);
+}
+
+.stat-item{
+    text-align: center;
+    color: white;
+    margin: 15px;
+}
+
+.stat-number{
+    display: block;
+    font-size: 40px;
+    font-weight: 700;
+    color: #1A80F5;
+}
+
+.stat-label{
+    font-size: 18px;
+}
+
+/* Why Started Section */
+.start{
+    width: 80%;
+    max-width: 1000px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.1);
+    text-align: center;
+    transition: 0.3s;
+}
+.start:hover{
+    transform:scale(1.1) translateY(-10px);
+}
+
+.start p{
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* Team Section */
+.team{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: 50px auto;
+    flex-wrap: wrap;
+}
+.team > div{
+    text-align: center;
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 250px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.1);
+    transition: 0.3s;
+    
+}
+.team .personone:hover{
+    transform: translateY(-10px);
+    
+}
+.team img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.team p{
+    margin-top: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Slider Section */
+.about-slider{
+    width: 80%;
+    max-width: 1000px;
+    margin: 60px auto 40px;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.about-slider img{
+    width: 100%;
+    height:450px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-caption{
+    background: rgba(0, 0, 0, 0.822);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.carousel-caption h2{
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.carousel-caption p{
+    font-size: 18px;
+}
+/*respon eka*/
+@media screen and (max-width: 1024px){
+    nav.navbar{
+        padding: 0 30px;
+        height: 70px;
+    }
+
+    .logo img{
+        width: 160px;
+    }
+
+    .navtype{
+        gap: 35px;
+    }
+
+    .navtype a{
+        font-size: 17px;
+    }
+
+    .loginbtn{
+        padding: 8px 18px;
+        font-size: 17px;
+    }
+
+    .about2 h1{
+        font-size: 36px;
+    }
+
+    .about-slider img{
+        height: 380px;
+    }
+}
+
+@media(max-width: 768px){
+    body{
+        padding-top: 70px;
+    }
+
+    nav.navbar{
+        padding: 0 20px;
+        height: 70px;
+    }
+
+    .logo img{
+        width: 130px;
+    }
+
+    .navtype{
+        display: flex;
+        position: absolute;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+        padding: 30px 0;
+        transition: .4s;
+        box-shadow: 0 5px 15px rgba(0,0,0,.1);
+        z-index: 999;
+    }
+
+    .navtype.active{
+        left: 0;
+    }
+
+    .mobilelogin{
+        display: block;
+    }
+
+    .mobilelogin a{
+        color: black;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .menutoggle{
+        display: block;
+    }
+
+    .loginbtn{
+        display: none;
+    }
+
+    .about2{
+        margin: 40px 0 15px;
+    }
+
+    .about2 h1{
+        font-size: 30px;
+    }
+
+    .p p{
+        font-size: 16px;
+    }
+
+    .mission{
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .stats-bar{
+        padding: 25px;
+    }
+
+    .stat-number{
+        font-size: 32px;
+    }
+
+    .start{
+        width: 90%;
+        padding: 25px;
+    }
+
+    .team > div{
+        width: 200px;
+    }
+
+    .about-slider img{
+        height: 260px;
+    }
+
+    .carousel-caption h2{
+        font-size: 24px;
+    }
+
+    .carousel-caption p{
+        font-size: 15px;
+    }
+    .about-slider img{
+        height: 280px;
+    }
+}
