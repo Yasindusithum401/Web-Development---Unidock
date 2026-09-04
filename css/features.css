@@ -1,0 +1,892 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    background: linear-gradient(to bottom,#FFFFFF,#BAD6EA,#BAD6EA);
+    min-height:100vh;
+    padding-top:80px;
+}
+.featuressection{
+    width:100%;
+    padding:90px 8%;
+}
+.sectiontitle{
+    text-align:center;
+    font-size:42px;
+    font-weight:700;
+    color:#222;
+    margin-bottom:80px;
+}
+.featurescontainer{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:35px;
+}
+/*Card*/
+.featurecard{
+    background:#eef5fb;
+    border:1px solid #cfd8e3;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    gap:24px;
+    padding:40px;
+    transition:0.35s;
+    cursor:pointer;
+    width: 100%;
+    height: 100%;
+}
+.featurecard:hover{
+    transform:translateY(-10px);
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+    background:#ffffff;
+}
+.cardlink{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.icon{
+    width:82px;
+    height:82px;
+    min-width:82px;
+    border-radius:50%;
+    background:#dde5ef;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:42px;
+}
+/*icon color*/
+.blue{
+    color:#2878d7;
+}
+.green{
+    color:#33c200;
+}
+.purple{
+    color:#8b18ff;
+}
+.red{
+    color:#ff0000;
+}
+.lightgreen{
+    color:#59b96e;
+}
+.darkblue{
+    color:#1d2ad3;
+}
+.cardlink span{
+    font-size: 58px;
+}
+/*text*/
+.featurecontent h3{
+    font-size:31px;
+    font-weight:700;
+    color:#2b2b2b;
+    margin-bottom:10px;
+}
+.featurecontent p{
+    font-size:17px;
+    color:#555;
+    line-height:1.8;
+}
+/*upload popup eka */
+.uploadOverlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.55);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+.uploadContainer{
+    width:862px;
+    max-width:92%;
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    position:relative;
+    animation:popup .35s ease;
+}
+.uploadContainer h2{
+    text-align:center;
+    color:#2878d7;
+    margin-bottom:20px;
+}
+.uploadClose{
+    position:absolute;
+    top:12px;
+    right:18px;
+    border:none;
+    background:none;
+    font-size:30px;
+    cursor:pointer;
+    color:#444;
+}
+.uploadClose:hover{
+    color:red;
+}
+.uploadGroup{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:18px;
+}
+.uploadGroup label{
+    font-weight:600;
+    margin-bottom:8px;
+}
+.uploadGroup input{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+.uploadGroup input:focus{
+    border-color:#2878d7;
+}
+.uploadGroup small{
+    color:#777;
+    margin-top:5px;
+}
+.uploadBtn{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:10px;
+    background:#2878d7;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+.uploadBtn:hover{
+    background:#225088;
+}
+@keyframes popup{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+/*search eka*/
+.searchBar{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+.searchBar input, .searchBar select{
+    flex:1;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+}
+.searchBar button{
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:#33c200;
+    color:#fff;
+    cursor:pointer;
+    font-size:15px;
+}
+#searchResults{
+    max-height:400px;
+    overflow-y:auto;
+}
+.searchResultCard{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#f5faf1;
+    padding:15px 18px;
+    border-radius:12px;
+    margin-bottom:12px;
+}
+.searchResultCard h4{
+    margin:0 0 4px;
+    color:#222;
+}
+.searchResultCard p{
+    margin:0;
+    color:#666;
+    font-size:14px;
+}
+.searchResultCard .actions a, .searchResultCard .actions button{
+    margin-left:8px;
+    text-decoration:none;
+    border:none;
+    background:none;
+    font-size:20px;
+    cursor:pointer;
+    color:#33c200;
+}
+/*reminder eka */
+.reminderOverlay,
+.addReminderOverlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.55);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    padding:20px;
+}
+.reminderContainer,
+.addReminderContainer{
+    background:white;
+    width:700px;
+    max-width:95%;
+    padding:40px;
+    border-radius:25px;
+    position:relative;
+    animation:popup .3s ease;
+}
+.reminderContainer h2,
+.addReminderContainer h2{
+    text-align:center;
+    color:#1d2ad3;
+    margin-bottom:25px;
+}
+.reminderClose{
+    position:absolute;
+    right:20px;
+    top:15px;
+    background:none;
+    border:none;
+    font-size:35px;
+    cursor:pointer;
+}
+#reminderList{
+    max-height:350px;
+    overflow-y:auto;
+}
+.reminderCard{
+    background:#fff7ef;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid #1d2ad3;
+    padding: 20px 24px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    display: -webkit-box;
+    -webkit-line-clamp:3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+.reminderCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(29, 42, 211, 0.12);
+    border-color: #cbd5e1;
+    border-left-color: #2878d7;
+}
+.reminderCard h3{
+    color: #1e293b;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+}
+.reminderCard p{
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 800px; 
+    display: -webkit-box;
+    -webkit-line-clamp: 50; 
+    line-clamp: 50;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+.addReminderBtn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#1d2ad3;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+}
+#reminderNote{
+    width:100%;
+    height:180px;
+    resize:none;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+.emptyReminder{
+    text-align:center;
+    color:#777;
+    padding:30px;
+}
+#reminderOverlay .reminder-item,
+#reminderOverlay #reminderList > div {
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: all 0.25s ease;
+}
+
+#reminderOverlay .reminder-item:hover,
+#reminderOverlay #reminderList > div:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+#reminderOverlay .delete-reminder-btn,
+#reminderOverlay .deleteReminderBtn,
+#reminderOverlay button[class*="delete"] {
+    background: #fff5f5;
+    color: #ff3838;
+    border: 1px solid #ffe3e3;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+#reminderOverlay .delete-reminder-btn i,
+#reminderOverlay .deleteReminderBtn i,
+#reminderOverlay button[class*="delete"] i {
+    pointer-events: none;
+    transition: transform 0.25s ease;
+}
+#reminderOverlay .delete-reminder-btn:hover,
+#reminderOverlay .deleteReminderBtn:hover,
+#reminderOverlay button[class*="delete"]:hover {
+    background: linear-gradient(135deg, #ff4d4f 0%, #dc2626 100%);
+    color: #ffffff;
+    border-color: #dc2626;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35);
+}
+#reminderOverlay .delete-reminder-btn:hover i,
+#reminderOverlay .deleteReminderBtn:hover i,
+#reminderOverlay button[class*="delete"]:hover i {
+    transform: scale(1.15) rotate(-8deg);
+}
+#reminderOverlay .delete-reminder-btn:active,
+#reminderOverlay .deleteReminderBtn:active,
+#reminderOverlay button[class*="delete"]:active {
+    transform: translateY(0) scale(0.96);
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
+}
+@keyframes popup{
+from{
+    transform:scale(.7);
+    opacity:0;
+}
+to{
+    transform:scale(1);
+    opacity:1;
+}
+}
+/*todolist eka */
+.todolistoverlay,
+.addtodolisOverlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.55);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    padding:20px;
+}
+.todolistContainer,
+.addtodolistContainer{
+    background:white;
+    width:700px;
+    max-width:95%;
+    padding:40px;
+    border-radius:25px;
+    position:relative;
+    animation:popup .3s ease;
+}
+.todolistContainer h2,
+.addtodolistContainer h2{
+    text-align:center;
+    color:#8b18ff;
+    margin-bottom:25px;
+}
+.todolistClose{
+    position:absolute;
+    right:20px;
+    top:15px;
+    background:none;
+    border:none;
+    font-size:35px;
+    cursor:pointer;
+}
+#todoList{
+    max-height:350px;
+    overflow-y:auto;
+}
+.todolistCard{
+    background:#fff7ef;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+.todolistCard h3{
+    color:#8b18ff;
+}
+.todolistCard p{
+    color:#555;
+}
+.addtodolistBtn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#8b18ff;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+}
+#TodolistNote{
+    width:100%;
+    height:180px;
+    resize:none;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+.emptytodolist{
+     text-align:center;
+    color:#777;
+    padding:30px;
+}
+.uploadGroup2 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+.uploadGroup2 label {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.uploadGroup2 input,
+.uploadGroup2 textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+    font-family: inherit;
+}
+.uploadGroup2 input:focus,
+.uploadGroup2 textarea:focus {
+    border-color: #8b18ff;
+}
+.uploadBtn2 {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background:#8b18ff; 
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+.uploadBtn2:hover {
+    background: #8b18ff;
+}
+.todolistCard.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+    background: #e0e0e0;
+}
+.todolistCard {
+    cursor: pointer; 
+    user-select: none;
+    transition: 0.2s ease;
+}
+.clearAllBtn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    float: right;
+}
+.clearAllBtn:hover {
+    background: #cc0000;
+}
+@keyframes popup{
+from{
+transform:scale(.7);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+/*bookmark style*/
+#bookmarkOverlay.uploadOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.322);
+    backdrop-filter: blur(2px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+#bookmarkOverlay.uploadOverlay.active {
+    display: flex;
+}
+#bookmarkOverlay .uploadContainer {
+    position: relative;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.062);
+    box-sizing: border-box;
+}
+#bookmarkOverlay #bookmarkList {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 15px;
+    padding-right: 5px;
+}
+#bookmarkOverlay #bookmarkList::-webkit-scrollbar {
+    width: 6px;
+}
+#bookmarkOverlay #bookmarkList::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 10px;
+}
+/* Bookmark Card Item Styling */
+#bookmarkOverlay .bookmark-card-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff0f0;
+    border: 1px solid #ffe0e0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    transition: transform 0.2s ease;
+}
+#bookmarkOverlay .bookmark-card-item:hover {
+    transform: translateY(-2px);
+}
+#bookmarkOverlay .bookmark-info h4 {
+    margin: 0 0 4px 0;
+    color: #111;
+    font-size: 16px;
+    font-weight: 600;
+}
+#bookmarkOverlay .bookmark-info p {
+    margin: 0;
+    color: #666;
+    font-size: 13px;
+}
+#bookmarkOverlay .bookmark-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+#bookmarkOverlay .bookmark-actions .btn-download {
+    background: #33c200;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+#bookmarkOverlay .bookmark-actions .btn-remove-bookmark {
+    background: none;
+    border: none;
+    color: #ff4d4f;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s ease;
+}
+#bookmarkOverlay .bookmark-actions .btn-remove-bookmark:hover {
+    color: #d9363e;
+}
+#bookmarkOverlay .empty-bookmark-msg {
+    text-align: center;
+    color: #888;
+    padding: 30px 10px;
+    font-size: 14px;
+}
+/*tablet respon*/
+@media(max-width:1024px){
+
+.featurescontainer{
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+.featurecard{
+    padding:30px;
+}
+.sectiontitle{
+    font-size:36px;
+}
+.featurecontent h3{
+    font-size:24px;
+}
+.featurecontent p{
+    font-size:15px;
+}
+.icon{
+    width:70px;
+    height:70px;
+    min-width:70px;
+    font-size:34px;
+}
+.uploadContainer{
+    width: 90%;
+    max-width: 500px;
+    padding: 25px;
+}
+.uploadContainer h2{
+    font-size: 24px;
+}
+.uploadGroup input{
+    padding: 11px;
+    font-size: 15px;
+}
+.uploadBtn{
+    padding: 12px;
+    font-size: 15px;
+}
+.todolistoverlay,
+.addtodolisOverlay{
+    padding:25px;
+}
+.todolistContainer,
+.addtodolistContainer{
+    width:85%;
+    max-width:700px;
+    padding:35px;
+    border-radius:20px;
+}
+.todolistContainer h2,
+.addtodolistContainer h2{
+    font-size:28px;
+}
+.todolistClose{
+    font-size:32px;
+    top:15px;
+    right:18px;
+}
+#todoList{
+    max-height:320px;
+}
+.todolistCard{
+    padding:18px;
+}
+.todolistCard h3{
+    font-size:20px;
+}
+.todolistCard p{
+    font-size:15px;
+    line-height:1.6;
+}
+.uploadGroup2 label{
+    font-size:16px;
+}
+.uploadGroup2 input,
+.uploadGroup2 textarea{
+    padding:12px;
+    font-size:15px;
+}
+#TodolistNote{
+    height:160px;
+}
+.uploadBtn2,
+.addtodolistBtn{
+    padding:14px;
+    font-size:16px;
+}
+.clearAllBtn{
+    padding:10px 18px;
+    font-size:14px;
+}
+}
+/*Mobile respon*/
+@media(max-width:768px){
+body{
+    padding-top:70px;
+}
+.featuressection{
+    padding:60px 20px;
+}
+.featurescontainer{
+    grid-template-columns:1fr;
+    gap:20px;
+}
+.sectiontitle{
+    font-size:30px;
+    margin-bottom:40px;
+}
+.featurecard{
+    padding:22px;
+    gap:18px;
+}
+.icon{
+    width:60px;
+    height:60px;
+     min-width:60px;
+    font-size:28px;
+}
+.featurecontent h3{
+    font-size:22px;
+}
+.featurecontent p{
+    font-size:14px;
+    line-height:1.6;
+}
+.uploadOverlay{
+    padding: 20px;
+}
+.uploadContainer{
+    width: 90%;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 15px;
+}
+.uploadContainer h2{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.uploadGroup{
+    margin-bottom: 16px;
+}
+.uploadGroup label{
+    font-size: 15px;
+}
+.uploadGroup input{
+    padding: 11px;
+    font-size: 15px;
+}
+.uploadBtn{
+    padding: 12px;
+    font-size: 15px;
+}
+.uploadClose{
+    font-size: 28px;
+}
+.reminderContainer,
+.addReminderContainer{
+    width:90%;
+    padding:25px;
+}
+.todolistoverlay,
+.addtodolisOverlay{
+    padding:15px;
+    align-items:flex-start;
+    overflow-y:auto;
+}
+.todolistContainer,
+.addtodolistContainer{
+    width:100%;
+    padding:25px 20px;
+    border-radius:18px;
+    margin-top:40px;
+}
+.todolistContainer h2,
+.addtodolistContainer h2{
+    font-size:24px;
+    margin-bottom:20px;
+}
+.todolistClose{
+    top:10px;
+    right:15px;
+    font-size:30px;
+}
+#todoList{
+    max-height:280px;
+}
+.todolistCard{
+    padding:15px;
+    border-radius:12px;
+}
+.todolistCard h3{
+    font-size:18px;
+}
+.todolistCard p{
+    font-size:14px;
+    line-height:1.5; 
+}
+.uploadGroup2 label{
+    font-size:15px;
+}
+.uploadGroup2 input,
+.uploadGroup2 textarea{
+    font-size:14px;
+    padding:10px;
+}
+#TodolistNote{
+    height:140px;
+}
+.uploadBtn2,
+.addtodolistBtn{
+    padding:12px;
+    font-size:15px;
+}
+.clearAllBtn{
+    width:100%;
+    float:none;
+    margin-bottom:15px;
+}
+}
