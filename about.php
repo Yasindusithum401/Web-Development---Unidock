@@ -1,0 +1,239 @@
+<?php 
+require_once __DIR__ . '/includes/functions.php'; 
+require_login(); 
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/about.css">
+
+</head>
+<body>
+<!--navigation bar-->
+<nav class="navbar">
+    <div class="logo">
+        <img src="images/logo.png" alt="logo image">
+    </div>
+    <div class="menutoggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul class="navtype" id="navMenu">
+        <li><a href="index.php">Home</a></li>
+        <li><a href="features.php">Features</a></li>
+        <li><a href="resources.php">Resources</a></li>
+        <li><a href="about.php">About</a></li>
+        <li class="mobilelogin">
+            <?php if (is_logged_in()): ?>
+                <a href="auth/logout.php">Logout</a>
+            <?php else: ?>
+                <a href="#" id="openModalBtn2">Login</a>
+            <?php endif; ?>
+        </li>
+    </ul>
+    <?php if (is_logged_in()): ?>
+        <a href="auth/logout.php" class="loginbtn">Logout</a>
+    <?php else: ?>
+        <a href="#" class="loginbtn" id="openModalBtn">Login</a>
+    <?php endif; ?>
+</nav>
+    <div class="about2">
+        <h1>About</h1>
+         
+    </div>
+    <div class="p">
+    <p>UniDock Student Resource Hub is a platform designed to help university students easily share and access academic resources.<br> Students can upload, browse, search, and download lecture notes, past papers, PDFs, and other study materials in one organized place.<br>
+        Our goal is to make learning more efficient through a simple, secure, and user-friendly platform that encourages knowledge sharing and academic success.</p>
+    </div>
+    <div class="c">
+    <div class="mission">
+        <h3 class="a">Our Mission</h3>
+        <p>To create a secure, organized, and accessible platform that 
+            enables students to share knowledge and improve learning together.
+        </p>
+    </div>
+    <div class="mission">
+        <h3 class="a">Our Vision</h3>
+        <p>To become the leading digital resource hub that empowers students 
+            through collaboration, innovation, and easy access to quality educational materials.
+        </p>
+    </div>
+    <div class="mission">
+        <h3 class="a">Our Values</h3>
+        <p>At UniDock, we believe in knowledge sharing, collaboration, accessibility, and continuous learning.<br>
+             We are committed to providing a secure, simple, and reliable platform that helps students learn, grow, and succeed together.</p>
+    </div>
+    </div >
+<div class="stats-bar">
+    <div class="stat-item">
+        <span class="stat-number">0k+</span>
+        <span class="stat-label">Resources Shared</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number">0k+</span>
+        <span class="stat-label">Active Students</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number">5+</span>
+        <span class="stat-label">Faculties Covered</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number">1</span>
+        <span class="stat-label">Universities</span>
+    </div>
+</div>
+    <div class="start">
+        <p>Why We Started Unidock.lk<br>
+            Finding study materials shouldn't be difficult. We created Unidock.lk to give students one place to access notes, past papers, assignments, and learning resources.
+            <br>Our mission is to make education more organized, accessible, and collaborative for every student. </p>
+    </div>
+    <div class="team">
+        <div class="personone">
+            <div><img src="images/person 1.png" alt="person image"></div>
+            <P>Yasindu Sithum<br>Founder & Developer</P>
+        </div>
+        <div class="personone">
+            <div><img src="images/person2.png" alt="person image"></div>
+            <p>Dineth Induwara<br>Product Design & Developer</p>
+        </div>
+    </div>
+<!-- Bootstrap Slider -->
+<div id="aboutSlider" class="carousel slide about-slider" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#aboutSlider" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#aboutSlider" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#aboutSlider" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="images/about slid3.png" class="d-block w-100" alt="student">
+            <div class="carousel-caption">
+                <h2>Share Knowledge</h2>
+                <p>Upload and access academic resources easily</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="images/about slid1.png" class="d-block w-100" alt="learning">
+            <div class="carousel-caption">
+                <h2>Learn Together</h2>
+                <p>Connect with university students</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="images/about slid2.png" class="d-block w-100" alt="education">
+            <div class="carousel-caption">
+                <h2>UniDock</h2>
+                <p>Your student resource hub</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#aboutSlider" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#aboutSlider" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
+<!--footer section eka -->
+<footer class="footer">
+    <div class="footerlogo">
+        <img src="images/logo.png" alt="logo image">
+        <p> A Platform For Students To Share, Discover and Learn Together. </p>
+    </div>
+    <div class="link">
+        <h3>
+            Quick Links
+        </h3>
+        <ul class="qlink">
+            <li><a href="index.php">Home</a></li>
+            <li><a href="features.php">Features</a></li>
+            <li><a href="resources.php">Resources</a></li>
+            <li><a href="about.php">About</a></li>
+        </ul>
+    </div>
+    <div class="about">
+        <h3>About</h3>
+        <p> Student Resources Hub is a platform designed to help
+            students access study materials, organize tasks,
+            manage reminders, and discover useful academic
+            resources in one convenient place.Our goal is to support students in achieving academic success through simple and effective digital tools.
+        </p>
+    </div>
+    <div class="f0llowus">
+        <h3>Follow Us</h3>
+        <div class="iconfooter"><!--add karanna  link-->
+            <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-threads"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fa-solid fa-x"></i></a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 UniDock. All Rights Reserved.</p>
+    </div>
+</footer>
+<!--login section-->
+<div class="modaloverlay" id="modaloverlay">
+    <div class="modalcontainer">
+        <button type="button" class="closebtn" id="closeModalBtn">&times;</button>
+        <div class="modalleft">
+
+            <form id="loginFormContainer" class="formcontainer active" action="auth/login.php" method="post">
+                <h2>Welcome To Unidock</h2>
+                <?php if (isset($_GET['login_error'])): ?>
+                    <p style="color:#e60023;text-align:center;margin-bottom:10px;"><?php echo sanitize($_GET['login_error']); ?></p>
+                <?php endif; ?>
+                <input type="hidden" name="redirect" value="about.php">
+                <div class="formgroup">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="formgroup">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" name="login" class="submitbtn">Log In</button>  
+                
+                <p style="margin-top: 15px; font-size: 14px; text-align: center;">
+                    Not on Unidock yet? <a href="#" id="switchToSignUp" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Sign up</a>
+                </p>
+            </form>
+
+             <!--sign up section-->
+            <form id="signupFormContainer" class="formcontainer" action="auth/register.php" method="post">
+                <h2>Create Account</h2>
+                <?php if (isset($_GET['signup_error'])): ?>
+                    <p style="color:#e60023;text-align:center;margin-bottom:10px;"><?php echo sanitize($_GET['signup_error']); ?></p>
+                <?php endif; ?>
+                <input type="hidden" name="redirect" value="about.php">
+                <div class="formgroup"> <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" name="signupname" placeholder="Full Name" required>
+                </div>
+                <div class="formgroup">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required>
+                </div>
+                <div class="formgroup">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Create Password" required>
+                </div>
+                <button type="submit" name="signup" class="submitbtn" style="background-color: #0076d3;">Sign up</button>
+                
+                <p style="margin-top: 15px; font-size: 14px; text-align: center;">
+                    Already have an account? <a href="#" id="switchToLogIn" style="color: #1A80F5; font-weight: bold; text-decoration: none;">Log in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
