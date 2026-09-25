@@ -1,449 +1,383 @@
 (function () {
     'use strict';
-    var LOGGED_IN   = typeof IS_LOGGED_IN !== 'undefined' ? IS_LOGGED_IN : false;
-    var CURRENT_UID = typeof CURRENT_USER_ID !== 'undefined' ? CURRENT_USER_ID : 0;
-    var qaCard              = document.getElementById('qaCard');
-    var qaOverlay           = document.getElementById('qaOverlay');
-    var closeQA             = document.getElementById('closeQA');
-    var qaApp               = document.getElementById('qaApp');
-    var qaChatList          = document.getElementById('qaChatList');
-    var qaNewChatBtn        = document.getElementById('openAskQuestion');
-    var qaThreadEmpty       = document.getElementById('qaThreadEmpty');
-    var qaThreadActive      = document.getElementById('qaThreadActive');
-    var qaBackBtn           = document.getElementById('qaBackBtn');
-    var qaThreadAvatar      = document.getElementById('qaThreadAvatar');
-    var qaThreadTitle       = document.getElementById('qaThreadTitle');
-    var qaThreadAuthor      = document.getElementById('qaThreadAuthor');
-    var qaDeleteQuestionBtn = document.getElementById('qaDeleteQuestionBtn');
-    var qaMessages          = document.getElementById('qaMessages');
-    var qaComposer           = document.getElementById('qaComposer');
-    var qaReplyInput        = document.getElementById('qaReplyInput');
-    var qaSendBtn            = document.getElementById('qaSendBtn');
-    var askOverlay          = document.getElementById('askQuestionOverlay');
-    var closeAskQuestion    = document.getElementById('closeAskQuestion');
-    var qaTitleInput        = document.getElementById('qaTitle');
-    var qaBodyInput         = document.getElementById('qaBody');
-    var submitQuestionBtn   = document.getElementById('submitQuestion');
-    var qaFormError         = document.getElementById('qaFormError');
 
-    if (!qaOverlay) return; 
+    const QA_ENDPOINT = 'Qa.php';
+    const POLL_INTERVAL_MS = 5000;
 
-    var allQuestions = [];
-    var activeQuestionId = null;
-    var listPollTimer = null;
-    var threadPollTimer = null;
+    const qaCard        = document.getElementById('qaCard');
+    const qaOverlay      = document.getElementById('qaOverlay');
+    const closeQA        = document.getElementById('closeQA');
+    const qaFeed         = document.getElementById('qaFeed');
+    const qaFormError    = document.getElementById('qaFormError');
+    const qaPostForm     = document.getElementById('qaPostForm');
+    const qaPostBody     = document.getElementById('qaPostBody');
+    const qaSendBtn      = document.getElementById('qaSendBtn');
 
-    function esc(str) {
-        return String(str == null ? '' : str);
+    if (!qaOverlay || !qaFeed || !qaPostForm) {
+        return;
     }
 
-    function initials(name) {
-        name = (name || '?').trim();
-        if (!name) return '?';
-        var parts = name.split(/\s+/);
-        var out = parts[0].charAt(0);
-        if (parts.length > 1) out += parts[parts.length - 1].charAt(0);
-        return out.toUpperCase();
+    const isLoggedIn = typeof IS_LOGGED_IN !== 'undefined' && IS_LOGGED_IN;
+    const currentUserId = typeof CURRENT_USER_ID !== 'undefined' ? Number(CURRENT_USER_ID) : 0;
+
+    let pollTimer = null;
+    const threadState = {};
+
+    function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str == null ? '' : String(str);
+        return div.innerHTML;
     }
 
-    var AVATAR_COLORS = ['#f56a6a', '#f0932b', '#eb4d9e', '#6c5ce7', '#0984e3', '#00b894', '#e67e22', '#26a69a'];
-    function avatarColor(name) {
-        var str = name || '?';
-        var hash = 0;
-        for (var i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
-        return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
+    function timeAgo(dateStr) {
+        const then = new Date(dateStr.replace(' ', 'T'));
+        if (isNaN(then.getTime())) return dateStr;
+        const diffSec = Math.floor((Date.now() - then.getTime()) / 1000);
+        if (diffSec < 5) return 'just now';
+        if (diffSec < 60) return diffSec + 's ago';
+        const diffMin = Math.floor(diffSec / 60);
+        if (diffMin < 60) return diffMin + 'm ago';
+        const diffHr = Math.floor(diffMin / 60);
+        if (diffHr < 24) return diffHr + 'h ago';
+        const diffDay = Math.floor(diffHr / 24);
+        if (diffDay < 7) return diffDay + 'd ago';
+        return then.toLocaleDateString();
     }
 
-    function parseDate(mysqlDate) {
-        // "YYYY-MM-DD HH:MM:SS" -> Date
-        return new Date(String(mysqlDate).replace(' ', 'T'));
+    function autoGrow(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
     }
 
-    function timeShort(mysqlDate) {
-        var d = parseDate(mysqlDate);
-        return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    function setFormError(msg) {
+        qaFormError.textContent = msg || '';
     }
 
-    function listTimeLabel(mysqlDate) {
-        var d = parseDate(mysqlDate);
-        var now = new Date();
-        var sameDay = d.toDateString() === now.toDateString();
-        if (sameDay) return timeShort(mysqlDate);
-        var yesterday = new Date(now);
-        yesterday.setDate(now.getDate() - 1);
-        if (d.toDateString() === yesterday.toDateString()) return 'Yesterday';
-        return d.toLocaleDateString([], { day: '2-digit', month: 'short' });
+    async function apiCall(action, { method = 'GET', params = null, body = null } = {}) {
+        let url = QA_ENDPOINT + '?action=' + encodeURIComponent(action);
+        const opts = { method, headers: {} };
+
+        if (method === 'GET' && params) {
+            const qs = new URLSearchParams(params).toString();
+            if (qs) url += '&' + qs;
+        }
+        if (method === 'POST') {
+            const form = new URLSearchParams(body || {});
+            opts.body = form;
+            opts.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+
+        const res = await fetch(url, opts);
+        let data;
+        try {
+            data = await res.json();
+        } catch (e) {
+            throw new Error('Server returned an invalid response.');
+        }
+        return data;
     }
 
-    function dateChipLabel(mysqlDate) {
-        var d = parseDate(mysqlDate);
-        var now = new Date();
-        if (d.toDateString() === now.toDateString()) return 'Today';
-        var yesterday = new Date(now);
-        yesterday.setDate(now.getDate() - 1);
-        if (d.toDateString() === yesterday.toDateString()) return 'Yesterday';
-        return d.toLocaleDateString([], { day: 'numeric', month: 'long', year: 'numeric' });
-    }
-
-    function el(tag, className, text) {
-        var e = document.createElement(tag);
-        if (className) e.className = className;
-        if (text !== undefined) e.textContent = text;
-        return e;
-    }
-
-    function ensureLoggedIn() {
-        if (LOGGED_IN) return true;
-        var loginTrigger = document.getElementById('openModalBtn2') || document.getElementById('openModalBtn');
-        if (loginTrigger) loginTrigger.click();
-        return false;
-    }
-
-    function openQaOverlay() {
-        qaOverlay.classList.add('active');
-        loadQuestionList();
-        listPollTimer = setInterval(loadQuestionList, 15000);
-    }
-
-    function closeQaOverlay() {
-        qaOverlay.classList.remove('active');
-        clearInterval(listPollTimer);
-        clearInterval(threadPollTimer);
-    }
-
-    function openAskOverlay() {
-        if (!ensureLoggedIn()) return;
-        qaTitleInput.value = '';
-        qaBodyInput.value = '';
-        hideFormError();
-        askOverlay.classList.add('active');
-        qaTitleInput.focus();
-    }
-
-    function closeAskOverlay() {
-        askOverlay.classList.remove('active');
-    }
-
-    function showFormError(msg) {
-        qaFormError.textContent = msg;
-        qaFormError.style.display = 'block';
-    }
-    function hideFormError() {
-        qaFormError.style.display = 'none';
-    }
-
-    /*  chat list  */
-
-    function loadQuestionList() {
-        fetch('Qa.php?action=list')
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-                if (!data.success) return;
-                allQuestions = data.questions || [];
-                renderQuestionList();
-            })
-            .catch(function () {
-                qaChatList.innerHTML = '';
-                qaChatList.appendChild(el('p', 'qaEmptyState', 'Could not load questions. Check your connection.'));
-            });
-    }
-
-    function renderQuestionList() {
-        qaChatList.innerHTML = '';
-
-        if (allQuestions.length === 0) {
-            qaChatList.appendChild(el('p', 'qaEmptyState', 'No questions yet. Tap the pencil to start one!'));
+    function renderFeed(questions) {
+        if (!questions || questions.length === 0) {
+            qaFeed.innerHTML = '<p class="qaEmptyState">No messages yet. Start the conversation!</p>';
             return;
         }
 
-        allQuestions.forEach(function (q) {
-            var item = el('div', 'qaChatItem');
-            item.dataset.id = q.id;
-            if (String(q.id) === String(activeQuestionId)) item.classList.add('selected');
+        const frag = document.createDocumentFragment();
+        questions.forEach((q) => {
+            frag.appendChild(renderMessage(q));
+        });
+        qaFeed.innerHTML = '';
+        qaFeed.appendChild(frag);
+    }
 
-            var avatar = el('div', 'qaAvatar', initials(q.author));
-            avatar.style.background = avatarColor(q.author);
+    function renderMessage(q) {
+        const isOwner = isLoggedIn && Number(q.user_id) === currentUserId;
+        const state = threadState[q.id] || { open: false, loaded: false };
+        threadState[q.id] = state;
 
-            var body = el('div', 'qaChatItemBody');
-            var top = el('div', 'qaChatItemTop');
-            top.appendChild(el('span', 'qaChatItemTitle', q.title));
-            top.appendChild(el('span', 'qaChatItemTime', listTimeLabel(q.created_at)));
+        const wrap = document.createElement('div');
+        wrap.className = 'qaMsg';
+        wrap.dataset.questionId = q.id;
 
-            var previewRow = el('div', 'qaChatItemTop');
-            var preview = el('span', 'qaChatItemPreview', q.author + ': ' + q.body);
-            previewRow.appendChild(preview);
-            if (parseInt(q.reply_count, 10) > 0) {
-                previewRow.appendChild(el('span', 'qaReplyBadge', q.reply_count));
-            }
+        wrap.innerHTML = `
+            <div class="qaMsgHead">
+                <span class="qaAuthor">${escapeHtml(q.author)}</span>
+                <span class="qaTime">${escapeHtml(timeAgo(q.created_at))}</span>
+            </div>
+            <div class="qaMsgBody"></div>
+            <div class="qaMsgFooter">
+                <button type="button" class="qaReplyToggle" data-action="toggle-replies">
+                    <i class="fa-regular fa-comment-dots"></i> ${Number(q.reply_count) || 0} repl${Number(q.reply_count) === 1 ? 'y' : 'ies'}
+                </button>
+                ${isOwner ? '<button type="button" class="qaDeleteBtn" data-action="delete-question"><i class="fa-solid fa-trash"></i> Delete</button>' : ''}
+            </div>
+            <div class="qaRepliesBox${state.open ? ' open' : ''}">
+                <div class="qaRepliesList"></div>
+                ${isLoggedIn
+                    ? `<form class="qaReplyForm" data-action="reply-form">
+                           <textarea placeholder="Write a reply..." rows="1" required></textarea>
+                           <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                       </form>`
+                    : '<p class="qaLoginNotice">Log in to reply.</p>'}
+            </div>
+        `;
 
-            body.appendChild(top);
-            body.appendChild(previewRow);
+        wrap.querySelector('.qaMsgBody').textContent = q.body;
 
-            item.appendChild(avatar);
-            item.appendChild(body);
-            item.addEventListener('click', function () { openThread(q.id); });
+        if (state.open) {
+            loadReplies(q.id, wrap.querySelector('.qaRepliesList'));
+        }
 
-            qaChatList.appendChild(item);
+        return wrap;
+    }
+
+    function renderReplies(container, replies) {
+        if (!replies || replies.length === 0) {
+            container.innerHTML = '<p class="qaEmptyState" style="margin:0;">No replies yet.</p>';
+            return;
+        }
+        container.innerHTML = '';
+        replies.forEach((r) => {
+            const isOwner = isLoggedIn && Number(r.user_id) === currentUserId;
+            const el = document.createElement('div');
+            el.className = 'qaReply';
+            el.dataset.replyId = r.id;
+            el.innerHTML = `
+                <div class="qaMsgHead">
+                    <span class="qaAuthor">${escapeHtml(r.author)}</span>
+                    <span class="qaTime">${escapeHtml(timeAgo(r.created_at))}</span>
+                </div>
+                <div class="qaMsgBody"></div>
+                ${isOwner ? '<button type="button" class="qaDeleteBtn" data-action="delete-reply"><i class="fa-solid fa-trash"></i> Delete</button>' : ''}
+            `;
+            el.querySelector('.qaMsgBody').textContent = r.body;
+            container.appendChild(el);
         });
     }
 
+    async function loadFeed() {
+        try {
+            const data = await apiCall('list');
+            if (data.success) {
+                renderFeed(data.questions);
+            } else {
+                qaFeed.innerHTML = '<p class="qaEmptyState">' + escapeHtml(data.message || 'Could not load messages.') + '</p>';
+            }
+        } catch (e) {
+            qaFeed.innerHTML = '<p class="qaEmptyState">Could not reach the server. Please try again.</p>';
+        }
+    }
 
-    function openThread(id) {
-        activeQuestionId = id;
-        qaApp.classList.add('showThread');
-        renderQuestionList(); 
+    async function loadReplies(questionId, container) {
+        container.innerHTML = '<p class="qaEmptyState" style="margin:0;">Loading replies...</p>';
+        try {
+            const data = await apiCall('view', { params: { id: questionId } });
+            if (data.success) {
+                renderReplies(container, data.replies);
+                threadState[questionId].loaded = true;
+            } else {
+                container.innerHTML = '<p class="qaEmptyState" style="margin:0;">Could not load replies.</p>';
+            }
+        } catch (e) {
+            container.innerHTML = '<p class="qaEmptyState" style="margin:0;">Could not reach the server.</p>';
+        }
+    }
 
-        fetch('Qa.php?action=view&id=' + encodeURIComponent(id))
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-                if (!data.success) {
-                    qaMessages.innerHTML = '';
-                    qaMessages.appendChild(el('p', 'qaEmptyState', data.message || 'Question not found.'));
-                    return;
+
+    async function postQuestion(body) {
+        return apiCall('ask', { method: 'POST', body: { body } });
+    }
+
+    async function postReply(questionId, body) {
+        return apiCall('reply', { method: 'POST', body: { question_id: questionId, body } });
+    }
+
+    async function deleteQuestion(id) {
+        return apiCall('delete_question', { method: 'POST', body: { id } });
+    }
+
+    async function deleteReply(id) {
+        return apiCall('delete_reply', { method: 'POST', body: { id } });
+    }
+
+
+    qaFeed.addEventListener('click', async (e) => {
+        const toggleBtn = e.target.closest('[data-action="toggle-replies"]');
+        const delQBtn   = e.target.closest('[data-action="delete-question"]');
+        const delRBtn   = e.target.closest('[data-action="delete-reply"]');
+
+        if (toggleBtn) {
+            const msgEl = toggleBtn.closest('.qaMsg');
+            const questionId = msgEl.dataset.questionId;
+            const box = msgEl.querySelector('.qaRepliesBox');
+            const state = threadState[questionId] || { open: false, loaded: false };
+            state.open = !state.open;
+            threadState[questionId] = state;
+            box.classList.toggle('open', state.open);
+            if (state.open && !state.loaded) {
+                loadReplies(questionId, box.querySelector('.qaRepliesList'));
+            }
+            return;
+        }
+
+        if (delQBtn) {
+            if (!confirm('Delete this message?')) return;
+            const msgEl = delQBtn.closest('.qaMsg');
+            const questionId = msgEl.dataset.questionId;
+            const data = await deleteQuestion(questionId);
+            if (data.success) {
+                delete threadState[questionId];
+                msgEl.remove();
+                if (!qaFeed.querySelector('.qaMsg')) {
+                    qaFeed.innerHTML = '<p class="qaEmptyState">No messages yet. Start the conversation!</p>';
                 }
-                renderThread(data.question, data.replies || []);
-            })
-            .catch(function () {
-                qaMessages.innerHTML = '';
-                qaMessages.appendChild(el('p', 'qaEmptyState', 'Could not load this conversation.'));
-            });
-
-        clearInterval(threadPollTimer);
-        threadPollTimer = setInterval(function () {
-            if (activeQuestionId !== id) return;
-            fetch('Qa.php?action=view&id=' + encodeURIComponent(id))
-                .then(function (r) { return r.json(); })
-                .then(function (data) {
-                    if (data.success) renderThread(data.question, data.replies || [], true);
-                })
-                .catch(function () {});
-        }, 6000);
-    }
-
-    function renderThread(question, replies, silent) {
-        qaThreadEmpty.style.display = 'none';
-        qaThreadActive.style.display = 'flex';
-
-        qaThreadAvatar.textContent = initials(question.author);
-        qaThreadAvatar.style.background = avatarColor(question.author);
-        qaThreadTitle.textContent = question.title;
-        qaThreadAuthor.textContent = replies.length + (replies.length === 1 ? ' reply' : ' replies');
-
-        qaDeleteQuestionBtn.style.display = (LOGGED_IN && parseInt(question.user_id, 10) === CURRENT_UID) ? 'flex' : 'none';
-        qaDeleteQuestionBtn.onclick = function () { deleteQuestion(question.id); };
-
-        var wasAtBottom = !silent || (qaMessages.scrollHeight - qaMessages.scrollTop - qaMessages.clientHeight < 60);
-
-        qaMessages.innerHTML = '';
-        qaMessages.appendChild(makeDateChip(question.created_at));
-        qaMessages.appendChild(makeBubble({
-            id: question.id,
-            body: question.body,
-            author: question.author,
-            user_id: question.user_id,
-            created_at: question.created_at
-        }, true));
-
-        var lastDay = new Date(question.created_at.replace(' ', 'T')).toDateString();
-        replies.forEach(function (r) {
-            var day = new Date(r.created_at.replace(' ', 'T')).toDateString();
-            if (day !== lastDay) {
-                qaMessages.appendChild(makeDateChip(r.created_at));
-                lastDay = day;
+            } else {
+                alert(data.message || 'Could not delete this message.');
             }
-            qaMessages.appendChild(makeBubble(r, false));
-        });
+            return;
+        }
 
-        if (wasAtBottom) qaMessages.scrollTop = qaMessages.scrollHeight;
-
-        qaComposer.style.display = LOGGED_IN ? 'flex' : 'none';
-        var notice = document.getElementById('qaLoginNotice');
-        if (!LOGGED_IN) {
-            if (!notice) {
-                notice = el('div', 'qaLoginNotice', 'Log in to join the conversation.');
-                notice.id = 'qaLoginNotice';
-                qaThreadActive.appendChild(notice);
+        if (delRBtn) {
+            if (!confirm('Delete this reply?')) return;
+            const replyEl = delRBtn.closest('.qaReply');
+            const msgEl = delRBtn.closest('.qaMsg');
+            const replyId = replyEl.dataset.replyId;
+            const data = await deleteReply(replyId);
+            if (data.success) {
+                replyEl.remove();
+                const countBtn = msgEl.querySelector('[data-action="toggle-replies"]');
+                const list = msgEl.querySelector('.qaRepliesList');
+                const remaining = list.querySelectorAll('.qaReply').length;
+                countBtn.innerHTML = `<i class="fa-regular fa-comment-dots"></i> ${remaining} repl${remaining === 1 ? 'y' : 'ies'}`;
+                if (remaining === 0) {
+                    list.innerHTML = '<p class="qaEmptyState" style="margin:0;">No replies yet.</p>';
+                }
+            } else {
+                alert(data.message || 'Could not delete this reply.');
             }
-        } else if (notice) {
-            notice.remove();
         }
-    }
+    });
 
-    function makeDateChip(dateStr) {
-        return el('div', 'qaDateChip', dateChipLabel(dateStr));
-    }
-
-    function makeBubble(msg, isQuestion) {
-        var mine = LOGGED_IN && parseInt(msg.user_id, 10) === CURRENT_UID;
-        var row = el('div', 'qaBubbleRow ' + (mine ? 'mine' : 'theirs'));
-        var bubble = el('div', 'qaBubble');
-
-        if (isQuestion) {
-            bubble.appendChild(el('span', 'qaBubbleTag', 'QUESTION'));
-        }
-        if (!mine) {
-            bubble.appendChild(el('span', 'qaBubbleAuthor', msg.author));
-        }
-        bubble.appendChild(el('div', 'qaBubbleText', msg.body));
-
-        var meta = el('div', 'qaBubbleMeta');
-        meta.appendChild(document.createTextNode(timeShort(msg.created_at)));
-        if (mine) {
-            var check = el('i', 'fa-solid fa-check');
-            meta.appendChild(check);
-        }
-        bubble.appendChild(meta);
-
-        if (mine) {
-            var del = el('button', 'qaBubbleDelete');
-            del.type = 'button';
-            del.innerHTML = '<i class="fa-solid fa-trash"></i>';
-            del.title = 'Delete';
-            del.addEventListener('click', function (e) {
-                e.stopPropagation();
-                if (isQuestion) deleteQuestion(msg.id);
-                else deleteReply(msg.id);
-            });
-            bubble.appendChild(del);
-        }
-
-        row.appendChild(bubble);
-        return row;
-    }
-
-    function backToList() {
-        qaApp.classList.remove('showThread');
-    }
-
-    /* actions  */
-
-    function postReply(e) {
+    qaFeed.addEventListener('submit', async (e) => {
+        const form = e.target.closest('[data-action="reply-form"]');
+        if (!form) return;
         e.preventDefault();
-        if (!ensureLoggedIn() || !activeQuestionId) return;
-        var body = qaReplyInput.value.trim();
-        if (!body) return;
+
+        const msgEl = form.closest('.qaMsg');
+        const questionId = msgEl.dataset.questionId;
+        const textarea = form.querySelector('textarea');
+        const body = textarea.value.trim();
+        if (body === '') return;
+
+        const btn = form.querySelector('button');
+        btn.disabled = true;
+
+        try {
+            const data = await postReply(questionId, body);
+            if (data.success) {
+                textarea.value = '';
+                const list = msgEl.querySelector('.qaRepliesList');
+                const emptyMsg = list.querySelector('.qaEmptyState');
+                if (emptyMsg) emptyMsg.remove();
+                await loadReplies(questionId, list);
+                const countBtn = msgEl.querySelector('[data-action="toggle-replies"]');
+                const remaining = list.querySelectorAll('.qaReply').length;
+                countBtn.innerHTML = `<i class="fa-regular fa-comment-dots"></i> ${remaining} repl${remaining === 1 ? 'y' : 'ies'}`;
+            } else {
+                alert(data.message || 'Could not post your reply.');
+            }
+        } catch (err) {
+            alert('Could not reach the server.');
+        } finally {
+            btn.disabled = false;
+        }
+    });
+
+    qaPostForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        setFormError('');
+
+        if (!isLoggedIn) {
+            setFormError('Please log in to post a message.');
+            return;
+        }
+
+        const body = qaPostBody.value.trim();
+        if (body === '') return;
 
         qaSendBtn.disabled = true;
-        var fd = new FormData();
-        fd.append('action', 'reply');
-        fd.append('question_id', activeQuestionId);
-        fd.append('body', body);
-
-        fetch('Qa.php', { method: 'POST', body: fd })
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-                qaSendBtn.disabled = false;
-                if (data.success) {
-                    qaReplyInput.value = '';
-                    qaReplyInput.style.height = 'auto';
-                    openThread(activeQuestionId);
-                    loadQuestionList();
-                } else {
-                    alert(data.message || 'Could not send your reply.');
-                }
-            })
-            .catch(function () {
-                qaSendBtn.disabled = false;
-                alert('Network error — please try again.');
-            });
-    }
-
-    function submitQuestion() {
-        if (!ensureLoggedIn()) return;
-        var title = qaTitleInput.value.trim();
-        var body = qaBodyInput.value.trim();
-        hideFormError();
-        if (!title || !body) {
-            showFormError('Please fill in both the title and the details.');
-            return;
+        try {
+            const data = await postQuestion(body);
+            if (data.success) {
+                qaPostBody.value = '';
+                qaPostBody.style.height = 'auto';
+                await loadFeed();
+                qaFeed.scrollTop = 0;
+            } else {
+                setFormError(data.message || 'Could not post your message.');
+            }
+        } catch (err) {
+            setFormError('Could not reach the server. Please try again.');
+        } finally {
+            qaSendBtn.disabled = false;
         }
+    });
 
-        submitQuestionBtn.disabled = true;
-        var fd = new FormData();
-        fd.append('action', 'ask');
-        fd.append('title', title);
-        fd.append('body', body);
+    qaFeed.addEventListener('input', (e) => {
+        if (e.target.tagName === 'TEXTAREA') autoGrow(e.target);
+    });
 
-        fetch('Qa.php', { method: 'POST', body: fd })
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-                submitQuestionBtn.disabled = false;
-                if (data.success) {
-                    closeAskOverlay();
-                    loadQuestionList();
-                    openThread(data.id);
-                } else {
-                    showFormError(data.message || 'Could not post your question.');
-                }
-            })
-            .catch(function () {
-                submitQuestionBtn.disabled = false;
-                showFormError('Network error — please try again.');
-            });
+    qaPostBody.addEventListener('input', () => autoGrow(qaPostBody));
+
+    qaPostBody.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            qaPostForm.requestSubmit ? qaPostForm.requestSubmit() : qaPostForm.dispatchEvent(new Event('submit', { cancelable: true }));
+        }
+    });
+    /* ---------- Open / close ---------- */
+    function openQA() {
+        qaOverlay.classList.add('active');
+        document.body.classList.add('qa-modal-open');
+        setFormError('');
+        loadFeed();
+        if (pollTimer) clearInterval(pollTimer);
+        pollTimer = setInterval(loadFeed, POLL_INTERVAL_MS);
+        if (!isLoggedIn) {
+            qaPostBody.disabled = true;
+            qaPostBody.placeholder = 'Log in to join the conversation...';
+            setFormError('You are viewing as a guest. Log in to post.');
+        }
     }
 
-    function deleteQuestion(id) {
-        if (!confirm('Delete this question and all its replies?')) return;
-        var fd = new FormData();
-        fd.append('action', 'delete_question');
-        fd.append('id', id);
-        fetch('Qa.php', { method: 'POST', body: fd })
-            .then(function (r) { return r.json(); })
-            .then(function () {
-                activeQuestionId = null;
-                qaThreadActive.style.display = 'none';
-                qaThreadEmpty.style.display = 'flex';
-                backToList();
-                loadQuestionList();
-            });
+    function closeQAOverlay() {
+        qaOverlay.classList.remove('active');
+        document.body.classList.remove('qa-modal-open');
+        if (pollTimer) {
+            clearInterval(pollTimer);
+            pollTimer = null;
+        }
     }
-
-    function deleteReply(id) {
-        if (!confirm('Delete this reply?')) return;
-        var fd = new FormData();
-        fd.append('action', 'delete_reply');
-        fd.append('id', id);
-        fetch('Qa.php', { method: 'POST', body: fd })
-            .then(function (r) { return r.json(); })
-            .then(function () {
-                if (activeQuestionId) openThread(activeQuestionId);
-                loadQuestionList();
-            });
-    }
-
-    /*  wire up events */
 
     if (qaCard) {
-        qaCard.addEventListener('click', function (e) {
+        qaCard.addEventListener('click', (e) => {
             e.preventDefault();
-            openQaOverlay();
+            openQA();
         });
     }
-    if (closeQA) closeQA.addEventListener('click', closeQaOverlay);
-    qaOverlay.addEventListener('click', function (e) {
-        if (e.target === qaOverlay) closeQaOverlay();
-    });
 
-    if (qaBackBtn) qaBackBtn.addEventListener('click', backToList);
-
-    if (qaNewChatBtn) qaNewChatBtn.addEventListener('click', openAskOverlay);
-    if (closeAskQuestion) closeAskQuestion.addEventListener('click', closeAskOverlay);
-    if (askOverlay) askOverlay.addEventListener('click', function (e) {
-        if (e.target === askOverlay) closeAskOverlay();
-    });
-    if (submitQuestionBtn) submitQuestionBtn.addEventListener('click', submitQuestion);
-
-    if (qaComposer) qaComposer.addEventListener('submit', postReply);
-    if (qaReplyInput) {
-        qaReplyInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                postReply(e);
-            }
-        });
-        qaReplyInput.addEventListener('input', function () {
-            qaReplyInput.style.height = 'auto';
-            qaReplyInput.style.height = Math.min(qaReplyInput.scrollHeight, 100) + 'px';
-        });
+    if (closeQA) {
+        closeQA.addEventListener('click', closeQAOverlay);
     }
+
+    qaOverlay.addEventListener('click', (e) => {
+        if (e.target === qaOverlay) closeQAOverlay();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && qaOverlay.classList.contains('active')) {
+            closeQAOverlay();
+        }
+    });
 })();
