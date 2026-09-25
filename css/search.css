@@ -79,8 +79,8 @@
 }
 
 .search-result-actions .btn-download{
-    background-color: #f0f2f5;
-    color: #111b21;
+    background-color: #a7a8a8;
+    color: #0b1216;
     padding: 8px 14px;
     border-radius: 6px;
     text-decoration: none;
@@ -88,18 +88,17 @@
 }
 
 .search-result-actions .bookmark-btn{
-    background: #f0f2f5;
-    border: none;
     color: #667781;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
     cursor: pointer;
+    border: none;
+    background-color: white;
+    font-size: 22px;
+    padding: 2px;
 }
 
 .search-result-actions .bookmark-btn.active{
     background: #ffe3e3;
-    color: #e63946;
+    color: red;
 }
 
 @media (max-width: 720px){
