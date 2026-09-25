@@ -1,584 +1,275 @@
-.qaOverlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(11, 20, 26, 0.6);
+
+.qaOverlay {
     display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
-    z-index: 3000;
-    padding: 24px;
+    z-index: 1000;
 }
 
-.qaOverlay.active{
+.qaOverlay.active {
     display: flex;
 }
 
-.qaApp{
-    width: 100%;
-    max-width: 980px;
-    height: 82vh;
-    max-height: 720px;
-    background: #ffffff;
+.qaContainer {
+    background: #fff;
+    width: 640px;
+    max-width: 92%;
+    height: 640px;
+    max-height: 85vh;
     border-radius: 14px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    position: relative;
-}
-
-.qaSidebar{
-    background: #ffffff;
-    border-right: 1px solid #e9edef;
     display: flex;
     flex-direction: column;
-    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
 }
 
-.qaSidebarHeader{
-    background: #0076d3;
-    color: #ffffff;
-    padding: 16px 18px;
+.qaHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
 }
 
-.qaSidebarHeader h2{
-    font-size: 17px;
-    font-weight: 600;
+.qaHeader h2 {
     margin: 0;
-}
-
-.qaSidebarHeader h2 i{
-    margin-right: 8px;
-}
-
-.qaCloseBtn{
-    background: none;
-    border: none;
+    font-size: 18px;
     color: #ffffff;
-    font-size: 26px;
-    cursor: pointer;
-    padding: 0 4px;
-}
-
-.qaChatList{
-    flex: 1;
-    overflow-y: auto;
-    padding-top: 8px;
-    padding-bottom: 70px;
-}
-
-.qaChatItem{
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    cursor: pointer;
-    border-bottom: 1px solid #f4f4f4;
-}
-
-.qaChatItem:hover{
-    background: #f5f6f6;
-}
-
-.qaChatItem.selected{
-    background: #e7f8f4;
-}
-
-.qaAvatar{
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 17px;
-    text-transform: uppercase;
-}
-
-.qaChatItemBody{
-    flex: 1;
-    min-width: 0;
-}
-
-.qaChatItemTop{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
     gap: 8px;
 }
 
-.qaChatItemTitle{
-    font-size: 14.5px;
-    font-weight: 600;
-    color: #111b21;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.qaChatItemTime{
-    font-size: 11.5px;
-    color: #667781;
-    flex-shrink: 0;
-}
-
-.qaChatItemPreview{
-    font-size: 13px;
-    color: #667781;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-top: 2px;
-}
-
-.qaReplyBadge{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 20px;
-    height: 20px;
-    padding: 0 6px;
-    border-radius: 999px;
-    background: #1A80F5;
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: 700;
-    margin-left: 6px;
-}
-
-.qaEmptyState{
-    text-align: center;
-    color: #667781;
-    padding: 40px 20px;
-    font-size: 13.5px;
-}
-
-.qaNewChatBtn{
-    position: absolute;
-    right: 22px;
-    bottom: 22px;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: #0076d3;
-    color: #ffffff;
+.qaCloseBtn {
+    background: none;
     border: none;
-    font-size: 19px;
+    font-size: 22px;
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.28);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: #888;
+    line-height: 1;
 }
 
-.qaNewChatBtn:hover{
-    background: #1A80F5;
+.qaCloseBtn:hover {
+    color: #333;
 }
 
-.qaThread{
-    display: flex;
-    flex-direction: column;
-    background: #f5f7fa;
-}
-
-.qaThreadEmpty{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #667781;
-    gap: 14px;
-}
-
-.qaThreadEmpty i{
-    font-size: 56px;
-    opacity: 0.35;
-}
-
-.qaThreadActive{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 0;
-}
-
-.qaThreadHeader{
-    background: #f0f2f5;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid #e9edef;
-}
-
-.qaBackBtn{
+.qaFormError {
     display: none;
-    background: none;
-    border: none;
-    font-size: 18px;
-    color: #111b21;
-    cursor: pointer;
-    padding: 4px 6px 4px 0;
-}
-
-.qaThreadInfo{
-    flex: 1;
-    min-width: 0;
-}
-
-.qaThreadInfo h3{
-    font-size: 15px;
-    font-weight: 600;
-    color: #111b21;
+    color: #e60023;
+    font-size: 13px;
+    text-align: center;
+    padding: 6px 20px 0;
     margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-.qaThreadInfo span{
-    font-size: 12.5px;
-    color: #667781;
-}
-
-.qaDeleteBtn{
-    background: none;
-    border: none;
-    color: #667781;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 6px;
-    border-radius: 50%;
-}
-
-.qaDeleteBtn:hover{
-    background: #e3e5e6;
-    color: #e63946;
-}
-
-.qaMessages{
+.qaFeed {
     flex: 1;
     overflow-y: auto;
-    padding: 18px 6% 10px 6%;
+    padding: 14px 18px;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 12px;
+    background: #f7f8fa;
 }
 
-.qaDateChip{
-    align-self: center;
-    background: rgba(255,255,255,0.8);
-    color: #667781;
-    font-size: 12px;
-    padding: 5px 12px;
-    border-radius: 8px;
-    margin: 10px 0;
+.qaEmptyState {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-top: 30px;
 }
 
-.qaBubbleRow{
+.qaPost {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.qaPostHead {
     display: flex;
-    width: 100%;
-    margin: 3px 0;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
 }
 
-.qaBubbleRow.mine{
-    justify-content: flex-end;
+.qaAvatar {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: #33c200;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
 }
 
-.qaBubbleRow.theirs{
-    justify-content: flex-start;
+.qaPostMeta {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
 }
 
-.qaBubble{
-    max-width: 65%;
-    padding: 7px 10px 8px 10px;
-    border-radius: 9px;
-    position: relative;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.08);
-    font-size: 14.2px;
-    line-height: 1.4;
-    color: #111b21;
+.qaAuthor {
+    font-weight: 600;
+    font-size: 14px;
+    color: #222;
 }
 
-.qaBubbleRow.mine .qaBubble{
-    background: #DCEEFB;
-    border-top-right-radius: 2px;
+.qaTime {
+    font-size: 12px;
+    color: #999;
 }
 
-.qaBubbleRow.theirs .qaBubble{
-    background: #ffffff;
-    border-top-left-radius: 2px;
+.qaPostHead .qaDeleteBtn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #bbb;
+    cursor: pointer;
+    font-size: 13px;
 }
 
-.qaBubbleAuthor{
-    font-size: 12.5px;
-    font-weight: 700;
-    margin-bottom: 2px;
-    display: block;
-    color: #1A80F5;
+.qaPostHead .qaDeleteBtn:hover {
+    color: #e60023;
 }
 
-.qaBubbleTag{
-    display: inline-block;
-    font-size: 10.5px;
-    font-weight: 700;
-    color: #1A80F5;
-    background: rgba(0,128,105,0.12);
-    padding: 1px 7px;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
-.qaBubbleText{
+.qaPostBody {
+    margin: 0 0 8px;
+    font-size: 14.5px;
+    color: #333;
     white-space: pre-wrap;
     word-break: break-word;
 }
 
-.qaBubbleMeta{
+.qaToggleReplies {
+    background: none;
+    border: none;
+    color: #33a02c;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    gap: 4px;
-    margin-top: 3px;
-    font-size: 10.5px;
-    color: #667781;
+    gap: 5px;
 }
 
-.qaBubbleMeta i{
-    font-size: 11px;
-    color: #667781;
+.qaToggleReplies:hover {
+    text-decoration: underline;
 }
 
-.qaBubbleDelete{
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 20px;
-    height: 20px;
+.qaReplies {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+}
+
+.qaReplyList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.qaReplyItem {
+    background: #f1f3f5;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13.5px;
+    color: #333;
+}
+
+.qaReplyAuthor {
+    font-weight: 600;
+    color: #1a80f5;
+}
+
+.qaReplyForm {
+    display: flex;
+    gap: 8px;
+}
+
+.qaReplyInput {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    padding: 6px 12px;
+    font-size: 13px;
+    outline: none;
+}
+
+.qaReplyInput:focus {
+    border-color: #33c200;
+}
+
+.qaReplyForm button {
+    background: #33c200;
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: #ffffff;
-    border: 1px solid #e9edef;
-    color: #667781;
-    font-size: 10px;
-    display: none;
+    cursor: pointer;
+    display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.qaBubble:hover .qaBubbleDelete{
-    display: flex;
-}
-
-.qaBubbleDelete:hover{
-    background: #e63946;
-    color: #ffffff;
-    border-color: #e63946;
-}
-
-.qaComposer{
+.qaPostForm {
     display: flex;
     align-items: flex-end;
     gap: 10px;
-    padding: 12px 16px;
-    background: #f0f2f5;
+    padding: 14px 18px;
+    border-top: 1px solid #eee;
+    background: #fff;
 }
 
-.qaComposer textarea{
+.qaPostForm textarea {
     flex: 1;
     resize: none;
-    border: none;
-    outline: none;
-    border-radius: 20px;
+    border: 1px solid #ddd;
+    border-radius: 18px;
     padding: 10px 16px;
     font-size: 14px;
     font-family: inherit;
+    outline: none;
     max-height: 100px;
-    line-height: 1.4;
-    background: #ffffff;
 }
 
-.qaSendBtn{
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #0076d3;
-    color: #ffffff;
+.qaPostForm textarea:focus {
+    border-color: #33c200;
+}
+
+.qaSendBtn {
+    background: #33c200;
     border: none;
-    font-size: 15px;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
     cursor: pointer;
-    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 15px;
 }
 
-.qaSendBtn:hover{
-    background: #1A80F5;
+.qaSendBtn:hover {
+    background: #2ba300;
 }
 
-.qaSendBtn:disabled{
-    background: #b7bcbe;
-    cursor: not-allowed;
-}
-
-.qaLoginNotice{
-    text-align: center;
-    padding: 12px 16px;
-    background: #fff3cd;
-    color: #7a5b00;
-    font-size: 13px;
-}
-
-.qaNewChatContainer{
-    width: 100%;
-    max-width: 460px;
-    background: #ffffff;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-}
-
-.qaNewChatHeader{
-    background: #0076d3;
-    color: #ffffff;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.qaNewChatHeader h2{
-    margin: 0;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-.qaNewChatBody{
-    padding: 20px;
-}
-
-.qaNewChatBody .uploadGroup{
-    margin-bottom: 16px;
-}
-
-.qaNewChatBody label{
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: #111b21;
-    margin-bottom: 6px;
-}
-
-.qaNewChatBody input,
-.qaNewChatBody textarea{
-    width: 100%;
-    border: 1px solid #e9edef;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    box-sizing: border-box;
-}
-
-.qaNewChatBody input:focus,
-.qaNewChatBody textarea:focus{
-    border-color: #0076d3;
-}
-
-.qaNewChatBody .uploadBtn{
-    width: 100%;
-    background: #0076d3;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    padding: 11px;
-    font-size: 14.5px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.qaNewChatBody .uploadBtn:hover{
-    background: #1A80F5;
-}
-
-.qaFormError{
-    color: #e63946;
-    font-size: 12.5px;
-    margin: -8px 0 14px 0;
-    display: none;
-}
-
-.qaChatList::-webkit-scrollbar,
-.qaMessages::-webkit-scrollbar{
-    width: 7px;
-}
-
-.qaChatList::-webkit-scrollbar-thumb,
-.qaMessages::-webkit-scrollbar-thumb{
-    background: #c8ccce;
-    border-radius: 6px;
-}
-
-.uploadGroup select{
-    width: 100%;
-    border: 1px solid #cfd8dc;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 14px;
-    font-family: inherit;
-    background: #ffffff;
-    color: #111b21;
-    outline: none;
-    box-sizing: border-box;
-}
-
-.uploadGroup select:focus{
-    border-color: #0076d3;
-}
-/*mobile*/
-@media (max-width: 760px){
-    .qaOverlay{
-        padding: 0;
-    }
-    .qaApp{
-        max-width: 100%;
+@media (max-width: 600px) {
+    .qaContainer {
+        width: 100%;
         height: 100%;
         max-height: 100%;
         border-radius: 0;
-        grid-template-columns: 1fr;
-    }
-    .qaSidebar{
-        border-right: none;
-    }
-    .qaApp.showThread .qaSidebar{
-        display: none;
-    }
-    .qaApp:not(.showThread) .qaThread{
-        display: none;
-    }
-    .qaBackBtn{
-        display: inline-flex;
-        align-items: center;
-    }
-    .qaBubble{
-        max-width: 82%;
-    }
-    .qaNewChatContainer{
-        max-width: 100%;
-        border-radius: 0;
-        height: 100%;
     }
 }
