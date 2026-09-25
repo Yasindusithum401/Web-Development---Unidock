@@ -149,12 +149,20 @@ body{
     outline:none;
     font-size:15px;
 }
+
 .uploadGroup input:focus{
     border-color:#2878d7;
 }
 .uploadGroup small{
     color:#777;
     margin-top:5px;
+}
+.uploadGroup select{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
 }
 .uploadBtn{
     width:100%;
