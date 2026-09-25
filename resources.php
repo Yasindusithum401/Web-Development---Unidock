@@ -18,7 +18,11 @@ if ($category !== 'all' && $category !== '') {
     $countStmt = $pdo->query($countSql);
 }
 $totalResources = $countStmt->fetchColumn();
-$totalPages = ceil($totalResources / $limit);
+$totalPages = (int) ceil($totalResources / $limit);
+if ($totalPages > 0 && $page > $totalPages) {
+    $page = $totalPages;
+    $offset = ($page - 1) * $limit;
+}
 
 // Fetch resources 
 if ($category !== 'all' && $category !== '') {
