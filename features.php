@@ -22,267 +22,7 @@ require_login();
   'GRAD' 0,
   'opsz' 24
 }
-
 </style>   
-<!-- Ask Questions (qa) modal CSS fixes.
-     css/qa.css was not provided, so these overrides target the exact
-     classes used in the qaOverlay markup below and fix layout/overflow. -->
-<style>
-.qaOverlay,
-.qaOverlay *,
-.qaOverlay *::before,
-.qaOverlay *::after {
-    box-sizing: border-box;
-}
-.qaOverlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 20px;
-}
-body.qa-modal-open {
-    overflow: hidden;
-}
-.qaOverlay.active {
-    display: flex;
-}
-.qaContainer {
-    width: 100%;
-    max-width: 480px;
-    height: 620px;
-    max-height: 90vh;
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-.qaHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
-    background: #33c200;
-    color: #fff;
-    flex-shrink: 0;
-}
-.qaHeader h2 {
-    margin: 0;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.qaCloseBtn {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    line-height: 1;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0;
-}
-.qaFormError {
-    margin: 0;
-    padding: 0 20px;
-    color: #e60023;
-    font-size: 13px;
-    min-height: 0;
-}
-.qaFormError:empty {
-    display: none;
-}
-.qaFeed {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background: #f7f9fa;
-}
-.qaEmptyState {
-    text-align: center;
-    color: #888;
-    margin: auto 0;
-}
-.qaPostForm {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    padding: 12px 16px;
-    border-top: 1px solid #e5e5e5;
-    background: #fff;
-    flex-shrink: 0;
-}
-.qaPostForm textarea {
-    flex: 1;
-    resize: none;
-    max-height: 100px;
-    min-height: 40px;
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    font-family: inherit;
-    font-size: 14px;
-    line-height: 1.3;
-}
-.qaPostForm textarea:focus {
-    outline: none;
-    border-color: #33c200;
-}
-.qaSendBtn {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-    min-height: 42px;
-    border-radius: 50%;
-    border: none;
-    background: #33c200;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    padding: 0;
-}
-.qaSendBtn:hover {
-    background: #2aa500;
-}
-
-/* Chat messages + reply thread */
-.qaMsg {
-    background: #fff;
-    border-radius: 12px;
-    padding: 10px 14px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-.qaMsgHead {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 4px;
-}
-.qaAuthor {
-    font-weight: 600;
-    font-size: 13.5px;
-    color: #1A80F5;
-}
-.qaTime {
-    font-size: 11px;
-    color: #999;
-    white-space: nowrap;
-}
-.qaMsgBody {
-    font-size: 14px;
-    color: #222;
-    line-height: 1.4;
-    white-space: pre-wrap;
-    word-break: break-word;
-}
-.qaMsgFooter {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 6px;
-}
-.qaReplyToggle {
-    background: none;
-    border: none;
-    color: #33c200;
-    font-size: 12.5px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0;
-}
-.qaReplyToggle:hover {
-    text-decoration: underline;
-}
-.qaDeleteBtn {
-    background: none;
-    border: none;
-    color: #ff4d4f;
-    font-size: 12px;
-    cursor: pointer;
-    padding: 0;
-    margin-left: auto;
-}
-.qaRepliesBox {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px dashed #e2e2e2;
-    display: none;
-}
-.qaRepliesBox.open {
-    display: block;
-}
-.qaRepliesList {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 8px;
-}
-.qaReply {
-    background: #f0f4f8;
-    border-radius: 10px;
-    padding: 6px 10px;
-}
-.qaReply .qaAuthor {
-    font-size: 12.5px;
-}
-.qaReply .qaMsgBody {
-    font-size: 13px;
-}
-.qaReplyForm {
-    display: flex;
-    gap: 8px;
-}
-.qaReplyForm textarea {
-    flex: 1;
-    resize: none;
-    min-height: 34px;
-    max-height: 80px;
-    padding: 6px 10px;
-    border: 1px solid #ddd;
-    border-radius: 14px;
-    font-family: inherit;
-    font-size: 13px;
-}
-.qaReplyForm textarea:focus {
-    outline: none;
-    border-color: #33c200;
-}
-.qaReplyForm button {
-    border: none;
-    background: #33c200;
-    color: #fff;
-    border-radius: 14px;
-    padding: 0 14px;
-    font-size: 12.5px;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-.qaReplyForm button:hover {
-    background: #2aa500;
-}
-.qaLoginNotice {
-    text-align: center;
-    color: #888;
-    font-size: 12.5px;
-    padding: 6px 0;
-}
-</style>
 </head>
 <body>
 <!--navigation bar-->
@@ -298,6 +38,7 @@ body.qa-modal-open {
         <li><a href="features.php">Features</a></li>
         <li><a href="resources.php">Resources</a></li>
         <li><a href="about.php">About</a></li>
+        <li><a href="Contact.php">Contact Us</a></li>
         <li class="mobilelogin">
             <?php if (is_logged_in()): ?>
                 <a href="auth/logout.php">Logout</a>
@@ -405,6 +146,7 @@ body.qa-modal-open {
             <li><a href="features.php">Features</a></li>
             <li><a href="resources.php">Resources</a></li>
             <li><a href="about.php">About</a></li>
+            <li><a href="Contact.php">Contact Us</a></li>
         </ul>
     </div>
     <div class="about">
@@ -428,7 +170,7 @@ body.qa-modal-open {
         <p>&copy; 2026 UniDock. All Rights Reserved.</p>
     </div>
 </footer>
-<!--features login-->
+<!-- login-->
 <div class="modaloverlay" id="modaloverlay">
         <div class="modalcontainer">
             <button type="button" class="closebtn" id="closeModalBtn">&times;</button>
