@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_message'])) {
         <li><a href="features.php">Features</a></li>
         <li><a href="resources.php">Resources</a></li>
         <li><a href="about.php">About</a></li>
-        <li><a href="contact.php">Contact US</a></li>
+        <li><a href="contact.php">Contact Us</a></li>
         <li class="mobilelogin">
             <?php if (is_logged_in()): ?>
                 <a href="auth/logout.php">Logout</a>
