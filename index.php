@@ -22,6 +22,7 @@
         <li><a href="features.php">Features</a></li>
         <li><a href="resources.php">Resources</a></li>
         <li><a href="about.php">About</a></li>
+        <li><a href="Contact.php">Contact Us</a></li>
         <li class="mobilelogin">
             <?php if (is_logged_in()): ?>
                 <a href="auth/logout.php">Logout</a>
@@ -81,6 +82,7 @@
             <li><a href="features.php">Features</a></li>
             <li><a href="resources.php">Resources</a></li>
             <li><a href="about.php">About</a></li>
+            <li><a href="Contact.php">Contact Us</a></li>
         </ul>
     </div>
     <div class="about">
@@ -133,7 +135,7 @@
                 </form>
                  <!--sign up section-->
                 <form action="auth/register.php" method="post">
-                <div id="signupFormContainer" class="formcontainer"><!--me wage anith ewwath danna mataha thiya gannaooooooooooooooooooooooooooo-->
+                <div id="signupFormContainer" class="formcontainer">
                     <h2>Create Account</h2>
                     <?php if (isset($_GET['signup_error'])): ?>
                         <p style="color:#e60023;text-align:center;margin-bottom:10px;"><?php echo sanitize($_GET['signup_error']); ?></p>
