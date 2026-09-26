@@ -28,6 +28,7 @@ require_login();
         <li><a href="features.php">Features</a></li>
         <li><a href="resources.php">Resources</a></li>
         <li><a href="about.php">About</a></li>
+        <li><a href="Contact.php">Contact Us</a></li>
         <li class="mobilelogin">
             <?php if (is_logged_in()): ?>
                 <a href="auth/logout.php">Logout</a>
@@ -155,6 +156,7 @@ require_login();
             <li><a href="features.php">Features</a></li>
             <li><a href="resources.php">Resources</a></li>
             <li><a href="about.php">About</a></li>
+            <li><a href="Contact.php">Contact Us</a></li>
         </ul>
     </div>
     <div class="about">
